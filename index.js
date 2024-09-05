@@ -81,7 +81,7 @@ app.post('/updatemammoz', async (req, res) => {
 
 // Routes
 // Trade endpoint
-// Get Trade 
+// Get Trade
 app.post('/trade', async (req, res) => {
     try {
         const { key, bot } = req.body;
@@ -89,7 +89,7 @@ app.post('/trade', async (req, res) => {
         if (!adData) {
             return res.status(404).json({ message: 'No data found' });
         }
-        const statusZero = await Log.find({ status: 0, trade: { $ne: 0 } });
+        const statusZero = await Log.findOne({ status: 0});
         res.status(200).json(statusZero);
     } catch (error) {
         res.status(500).json({ message: error.message });
