@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 
 // Routes
 // AD endpoint
-// Check AD 
+// Check AD (BOT)
 app.post('/check', async (req, res) => {
     try {
         const adData = await Ad.findOne({ key: req.body.key });
@@ -50,7 +50,7 @@ app.post('/check', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-// ADD AD
+// ADD AD (SERVER)
 app.post('/addmammoz', async (req, res) => {
     try {
         const { key, bot, trade, status } = req.body;
@@ -61,7 +61,7 @@ app.post('/addmammoz', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
 });
-// UPDATE AD
+// UPDATE AD (SERVER)
 app.post('/updatemammoz', async (req, res) => {
     try {
         const { key, bot, trade, status } = req.body;
@@ -81,11 +81,11 @@ app.post('/updatemammoz', async (req, res) => {
 
 // Routes
 // Trade endpoint
-// Get Trade
+// Get Trade (SERVER)
 app.post('/trade', async (req, res) => {
     try {
         const { key, bot } = req.body;
-        const adData = await Log.findOne({ key: key, bot: bot });
+        const adData = await Log.findOne({ key: key, mammoz: mammoz });
         if (!adData) {
             return res.status(404).json({ message: 'No data found' });
         }
@@ -95,7 +95,7 @@ app.post('/trade', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-// ADD Trade
+// ADD Trade (BOT)
 app.post('/addtrade', async (req, res) => {
   try {
         const { key, bot, mammoz, gem, rr, status } = req.body;
@@ -107,7 +107,7 @@ app.post('/addtrade', async (req, res) => {
         res.status(400).json({ message: error.message });
   }
 });
-// UPDATE Trade
+// UPDATE Trade (Server)
 app.post('/updatetrade', async (req, res) => {
     try {
         const { key, bot, status } = req.body;
