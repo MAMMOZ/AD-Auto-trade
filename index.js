@@ -84,7 +84,7 @@ app.post('/updatemammoz', async (req, res) => {
 // Get Trade (SERVER)
 app.post('/trade', async (req, res) => {
     try {
-        const { key, bot } = req.body;
+        const { key, mammoz } = req.body;
         const adData = await Log.findOne({ key: key, mammoz: mammoz });
         if (!adData) {
             return res.status(404).json({ message: 'No data found' });
