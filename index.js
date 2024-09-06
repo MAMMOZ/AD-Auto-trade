@@ -45,10 +45,10 @@ app.post('/check', async (req, res) => {
         if (!adData) {
             // return res.status(404).json({ message: 'No data found' });
             const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
-            res.status(404).json(statusZero);
+            return res.status(404).json(statusZero);
         }
         const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
-        res.status(200).json(statusZero);
+        return res.status(200).json(statusZero);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
