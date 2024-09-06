@@ -112,6 +112,8 @@ app.post('/addtrade', async (req, res) => {
             const newLog = new Log({ key, bot, mammoz, gem, rr, map, status });
             await newLog.save();
             res.status(200).json(newLog);
+        }else{
+            res.status(200).json(adData);
         }
   } catch (error) {
         res.status(400).json({ message: error.message });
