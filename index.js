@@ -100,6 +100,12 @@ app.post('/addtrade', async (req, res) => {
   try {
         const { key, bot, mammoz, gem, rr, status } = req.body;
         console.log(key, bot, mammoz, gem, rr, status);
+        const checksame = await Ad.findOne({mammoz: bot})
+        if (checksame) return res.status(404).json({ message: 'Ad Same Mammoz' });
+        const adData = await Log.findOne({ key: key, bot: bot, mammoz: mammoz, status: status });
+        if (!adData) {
+            return res.status(404).json({ message: 'No data found' });
+        }
         const newLog = new Log({ key, bot, mammoz, gem, rr, status });
         await newLog.save();
         res.status(200).json(newLog);
