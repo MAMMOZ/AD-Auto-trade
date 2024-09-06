@@ -40,9 +40,10 @@ app.use(bodyParser.json());
 // Check AD (BOT)
 app.post('/check', async (req, res) => {
     try {
-        const adData = await Ad.findOne({ key: req.body.key });
+        const { key, bot } = req.body;
+        const adData = await Ad.findOne({ key: key, bot: bot });
         if (!adData) {
-        return res.status(404).json({ message: 'No data found' });
+            return res.status(404).json({ message: 'No data found' });
         }
         const statusZero = await Ad.findOne({ status: 0, trade: { $ne: 0 } });
         res.status(200).json(statusZero);
