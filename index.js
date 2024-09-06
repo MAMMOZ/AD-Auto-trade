@@ -19,6 +19,7 @@ const adSchema = new mongoose.Schema({
     key: String,
     bot: String,
     trade: Number,
+    map: Number,
     status: Number
 });
 const Ad = mongoose.model('Ad', adSchema);
@@ -29,6 +30,7 @@ const logSchema = new mongoose.Schema({
     mammoz: String,
     gem: Number,
     rr: Number,
+    map: Number,
     status: Number
 });
 const Log = mongoose.model('Log', logSchema);
@@ -56,8 +58,8 @@ app.post('/check', async (req, res) => {
 // ADD AD (SERVER)
 app.post('/addmammoz', async (req, res) => {
     try {
-        const { key, bot, trade, status } = req.body;
-        const newLog = new Ad({ key, bot, trade, status });
+        const { key, bot, trade, map, status } = req.body;
+        const newLog = new Ad({ key, bot, trade, map, status });
         await newLog.save();
         res.status(200).json(newLog);
     } catch (error) {
@@ -70,7 +72,7 @@ app.post('/updatemammoz', async (req, res) => {
         const { key, bot, trade, status } = req.body;
         const updatedAd = await Ad.findOneAndUpdate(
             { key: key },
-            { bot: bot, trade: trade, status: status },
+            { bot: bot, trade: trade, map: map, status: status },
             { new: true }
         );
         if (!updatedAd) {
@@ -101,13 +103,13 @@ app.post('/trade', async (req, res) => {
 // ADD Trade (BOT)
 app.post('/addtrade', async (req, res) => {
   try {
-        const { key, bot, mammoz, gem, rr, status } = req.body;
-        console.log(key, bot, mammoz, gem, rr, status);
+        const { key, bot, mammoz, gem, rr, map, status } = req.body;
+        console.log(key, bot, mammoz, gem, rr, map, status);
         const checksame = await Ad.findOne({mammoz: bot})
         if (checksame) return res.status(404).json({ message: 'Ad Same Mammoz' });
-        const adData = await Log.findOne({ key: key, bot: bot, mammoz: mammoz, status: status });
+        const adData = await Log.findOne({ key: key, bot: bot, mammoz: mammoz, map: map, status: status });
         if (!adData) {
-            const newLog = new Log({ key, bot, mammoz, gem, rr, status });
+            const newLog = new Log({ key, bot, mammoz, gem, rr, map, status });
             await newLog.save();
             res.status(200).json(newLog);
         }
