@@ -69,7 +69,7 @@ app.post('/addmammoz', async (req, res) => {
 // UPDATE AD (SERVER)
 app.post('/updatemammoz', async (req, res) => {
     try {
-        const { key, bot, trade, status } = req.body;
+        const { key, bot, trade, map, status } = req.body;
         const updatedAd = await Ad.findOneAndUpdate(
             { key: key },
             { bot: bot, trade: trade, map: map, status: status },
