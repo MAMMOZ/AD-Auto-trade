@@ -50,7 +50,12 @@ app.post('/check', async (req, res) => {
             return res.status(404).json(statusZero);
         }
         const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
-        return res.status(200).json(statusZero);
+        if (statusZero){
+            return res.status(200).json(statusZero);
+        }else{
+            const statusZero = await Ad.findOne({ key:key, bot:bot});
+            return res.status(200).json(statusZero);
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
