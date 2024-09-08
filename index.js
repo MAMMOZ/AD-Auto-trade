@@ -250,22 +250,22 @@ app.post('/deletrade', async (req, res) => {
 });
 
 
-// บอกว่า mammoz ต้องทำอะไร sell or trade
-app.post('/trademammoz', async (req, res) => {
-    try {
-        const { key, bot } = req.body;
-        const loade = await Trade.findOne({ key: key, bot: bot });
-        res.status(200).json(loade);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// // ถาม mammoz ต้องทำอะไร sell or trade
+// app.post('/trademammoz', async (req, res) => {
+//     try {
+//         const { key, bot } = req.body;
+//         const loade = await Trade.findOne({ key: key, bot: bot });
+//         res.status(200).json(loade);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
 
-// บอกว่า bot ต้องทำอะไร buy or trade
-app.post('/tradebot', async (req, res) => {
+// mammoz ถาม bot ต้องทำอะไร buy or trade
+app.post('/mammoztradebot', async (req, res) => {
     try {
-        const { key, bot } = req.body;
-        const loade = await Trade.findOne({ key: key, bot: bot });
+        const { key, mammoz } = req.body;
+        const loade = await Trade.findOne({ key: key, mammoz: mammoz });
         res.status(200).json(loade);
     } catch (error) {
         res.status(500).json({ message: error.message });
