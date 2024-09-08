@@ -189,30 +189,36 @@ app.post('/check', async (req, res) => {
 
 // ADD Trade (BOT) AND ADD MAMMOZ AUTO เสร็จ
 app.post('/addtrade', async (req, res) => {
-  try {
+    try {
         const { key, bot, gem, rr, map, status } = req.body;
-        const findAd = await Ad.findOne({ status: 0, trade: { $ne: 0 } })
-        if (findAd){
-            const logCount = await Trade.countDocuments({ key: key, mammoz: findAd.bot, status: 0 });
-            if (logCount < findAd.trade) {
-                const newAd = await Ad.findOne({ 
-                    key: key, 
-                    status: 0, 
-                    trade: { $ne: 0 }, 
-                    _id: { $ne: adData._id }
-                });
-                const newLog = new Trade({ key, bot, mammoz: newAd.bot, gem, rr, map, status });
-                await newLog.save();
-                res.status(200).json(newLog);
-            }else{
-                res.status(400).json({ message: "ADD ERROR AD NOT FIND." });
-            }
+        console.log(key, bot, gem, rr, map, status);
 
+        // ค้นหา Ad ทั้งหมดที่มี status = 0 และ trade ไม่เป็น 0
+        const ads = await Ad.find({ status: 0, trade: { $ne: 0 } });
+        
+        // ตรวจสอบว่าพบ Ad หรือไม่
+        if (!ads.length) {
+            return res.status(400).json({ message: "No valid Ad found." });
         }
-        res.status(400).json({ message: "AD NOT FIND." });
-  } catch (error) {
-        res.status(400).json({ message: error.message });
-  }
+
+        // วนผ่านแต่ละ Ad
+        for (const ad of ads) {
+            const logCount = await Trade.countDocuments({ key: key, mammoz: ad.bot, status: 0 });
+
+            if (logCount < ad.trade) {
+                // ถ้า logCount ยังไม่เกิน ให้สร้าง Log ใหม่
+                const newLog = new Trade({ key, bot, mammoz: ad.bot, gem, rr, map, status });
+                await newLog.save();
+                return res.status(200).json(newLog);
+            }
+        }
+
+        // ถ้าพบว่า logCount ของทุก Ad เกินจำนวน trade ที่กำหนด
+        return res.status(400).json({ message: "Trade limit reached for all Ads." });
+
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
+    }
 });
 
 // UPDATE STATUS Trade (BOT) เสร็จ
