@@ -45,9 +45,19 @@ app.post('/check', async (req, res) => {
         const { key, bot } = req.body;
         const adData = await Ad.findOne({ key: key, bot: bot });
         if (!adData) {
-            // return res.status(404).json({ message: 'No data found' });
-            const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
-            return res.status(404).json(statusZero);
+            const logCount = await Log.countDocuments({ key: key, bot: bot, status: 0 });
+            if (logCount > 10) {
+                const newAd = await Ad.findOne({ 
+                    key: key, 
+                    status: 0, 
+                    trade: { $ne: 0 }, 
+                    _id: { $ne: adData._id }
+                });
+                return res.status(404).json(newAd);
+            }else{
+                const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
+                return res.status(404).json(statusZero);
+            }
         }
         const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
         if (statusZero){
@@ -128,11 +138,17 @@ app.post('/addtrade', async (req, res) => {
 app.post('/updatetrade', async (req, res) => {
     try {
         const { key, bot, status } = req.body;
+        console.log(key, bot, status);
+        const checksame = await Log.findOne({key: key, bot: bot})
+
+        console.log(checksame);
+
         const updatedAd = await Log.findOneAndUpdate(
-            { key: key, bot: bot },
+            { key: key, bot: bot, status: 0 },
             { status: status },
             { new: true }
         );
+        console.log(updatedAd);
         if (!updatedAd) {
             return res.status(404).json({ message: 'Trade not found' });
         }
