@@ -110,6 +110,24 @@ app.post('/updatemammoz', async (req, res) => {
     }
 });
 
+// UPDATE STATUS AD (SERVER)
+app.post('/updatestatusmammoz', async (req, res) => {
+    try {
+        const { key, bot, status } = req.body;
+        const updatedAd = await Ad.findOneAndUpdate(
+            { key: key, bot: bot },
+            { trade: trade, map: map, status: status },
+            { new: true }
+        );
+        if (!updatedAd) {
+            return res.status(404).json({ message: 'Ad not found' });
+        }
+        res.status(200).json(updatedAd);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+});
+
 // DELE AD (SERVER) เสร็จ
 app.post('/delemammoz', async (req, res) => {
     try {
