@@ -271,7 +271,7 @@ app.post('/deletrade', async (req, res) => {
 app.post('/mammoztradebot', async (req, res) => {
     try {
         const { key, mammoz } = req.body;
-        const loade = await Trade.findOne({ key: key, bot: mammoz });
+        const loade = await Trade.findOne({ key: key, mammoz: mammoz });
         res.status(200).json(loade);
     } catch (error) {
         res.status(500).json({ message: error.message });
