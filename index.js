@@ -110,6 +110,21 @@ app.post('/updatemammoz', async (req, res) => {
     }
 });
 
+// DELE AD (SERVER) เสร็จ
+app.post('/delemammoz', async (req, res) => {
+    try {
+        const { key, bot } = req.body;
+        const deletedTrade = await Ad.findOneAndDelete({ key: key, bot: bot });
+        if (deletedTrade) {
+            res.status(200).json({ message: 'Trade deleted successfully', data: deletedTrade });
+        } else {
+            res.status(404).json({ message: 'Trade not found for the provided key and bot' });
+        }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+});
+
 // // Routes
 // // Trade endpoint
 // // Get Trade (SERVER)
@@ -200,7 +215,7 @@ app.post('/addtrade', async (req, res) => {
   }
 });
 
-// UPDATE STATUS Trade (Server) เสร็จ
+// UPDATE STATUS Trade (BOT) เสร็จ
 app.post('/updatetrade', async (req, res) => {
     try {
         const { key, bot, status, newstatus } = req.body;
@@ -219,6 +234,22 @@ app.post('/updatetrade', async (req, res) => {
     }
 });
 
+// DELE Trade (BOT) เสร็จ
+app.post('/deletrade', async (req, res) => {
+    try {
+        const { key, bot } = req.body;
+        const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
+        if (deletedTrade) {
+            res.status(200).json({ message: 'Trade deleted successfully', data: deletedTrade });
+        } else {
+            res.status(404).json({ message: 'Trade not found for the provided key and bot' });
+        }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+});
+
+
 // บอกว่า mammoz ต้องทำอะไร sell or trade
 app.post('/trademammoz', async (req, res) => {
     try {
@@ -232,6 +263,18 @@ app.post('/trademammoz', async (req, res) => {
 
 // บอกว่า bot ต้องทำอะไร buy or trade
 app.post('/tradebot', async (req, res) => {
+    try {
+        const { key, bot } = req.body;
+        const loade = await Trade.findOne({ key: key, bot: bot });
+        res.status(200).json(loade);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+// เพิ่มข้อมูลลง Log
+app.post('/addlog', async (req, res) => {
     try {
         const { key, bot } = req.body;
         const loade = await Trade.findOne({ key: key, bot: bot });
