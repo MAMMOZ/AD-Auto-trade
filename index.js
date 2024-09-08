@@ -218,11 +218,11 @@ app.post('/addtrade', async (req, res) => {
 // UPDATE STATUS Trade (BOT) เสร็จ
 app.post('/updatetrade', async (req, res) => {
     try {
-        const { key, bot, status, newstatus } = req.body;
-        console.log(key, bot, status, newstatus);
+        const { key, bot, status } = req.body;
+        console.log(key, bot, status);
         const updatedAd = await Trade.findOneAndUpdate(
-            { key: key, bot: bot, status: status },
-            { status: newstatus },
+            { key: key, bot: bot },
+            { status: status },
             { new: true }
         );
         if (!updatedAd) {
@@ -254,7 +254,7 @@ app.post('/deletrade', async (req, res) => {
 app.post('/trademammoz', async (req, res) => {
     try {
         const { key, bot } = req.body;
-        const loade = await Ad.findOne({ key: key, bot: bot });
+        const loade = await Trade.findOne({ key: key, bot: bot });
         res.status(200).json(loade);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -276,8 +276,8 @@ app.post('/tradebot', async (req, res) => {
 // เพิ่มข้อมูลลง Log
 app.post('/addlog', async (req, res) => {
     try {
-        const { key, bot } = req.body;
-        const loade = await Trade.findOne({ key: key, bot: bot });
+        const { key, bot, gem, rr } = req.body;
+        const loade = await Trade.findOne({ key: key, bot: bot, gem: gem, rr: rr });
         res.status(200).json(loade);
     } catch (error) {
         res.status(500).json({ message: error.message });
