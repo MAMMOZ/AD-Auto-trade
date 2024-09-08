@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#2d1a64] font-sans">
+    <!-- Navbar -->
+    <div class="flex justify-between p-4 bg-[#3a287a]">
+        <div></div> <!-- Placeholder for left content if needed -->
+        <button class="bg-white text-black py-2 px-4 rounded-full">Login</button>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="max-w-4xl mx-auto my-8 text-white px-4">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-800 p-10 rounded-lg flex flex-col sm:flex-row justify-between items-center">
+            <div class="text-lg">Welcome</div>
+            <div class="text-4xl font-bold">MAMMOZ</div>
+            <div class="flex space-x-4 mt-4 sm:mt-0">
+                <div class="text-green-400">ONLINE : 0</div>
+                <div class="text-red-400">OFFLINE : 0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gems and Crystals -->
+    <div class="flex justify-center space-x-8 text-white px-4">
+        <div class="bg-[#463187] p-4 rounded-lg text-center grid grid-cols-2 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <img src="img/gem.webp" alt="Gem" class="mx-auto w-16">
+            </div>
+            <div>
+                <div class="text-2xl font-bold">599</div>
+            </div>
+        </div>
+        <div class="bg-[#463187] p-4 rounded-lg text-center grid grid-cols-2 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <img src="img/crystal.webp" alt="Crystal" class="mx-auto w-16">
+            </div>
+            <div>
+                <div class="text-2xl font-bold">599</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bot Table Section -->
+    <div class="max-w-4xl mx-auto my-8 text-white px-4">
+        <div class="bg-[#3a287a] p-6 rounded-lg">
+            <div class="grid grid-cols-5 sm:grid-cols-5 text-center gap-4">
+                <!-- Table Header -->
+                <div class="font-bold">BOT</div>
+                <div class="font-bold">GEM</div>
+                <div class="font-bold">RR</div>
+                <div class="col-span-2 font-bold">Trade</div>
+
+                <!-- First Row -->
+                <div class="flex flex-col items-center">
+                    <img src="img/bot-avatar.webp" alt="Bot" class="w-16 h-16 rounded-full">
+                    <span>mammoz</span>
+                </div>
+                <div class="grid grid-cols-2 bg-blue-700 rounded-lg flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <img src="img/gem.webp" alt="Gem" class="w-10 mx-auto">
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold">599</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 bg-purple-700 rounded-lg flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <img src="img/crystal.webp" alt="Crystal" class="w-8 mx-auto">
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold">599</div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center col-span-2">
+                    <div class="text-lg font-bold">→</div>
+                    <div class="flex flex-col items-center">
+                        <img src="img/bot-avatar.webp" alt="Bot" class="w-16 h-16 rounded-full">
+                        <span>mammoz</span>
+                    </div>
+                </div>
+
+                <!-- Second Row (copy same structure) -->
+                <div class="flex flex-col items-center">
+                    <img src="img/bot-avatar.webp" alt="Bot" class="w-16 h-16 rounded-full">
+                    <span>mammoz</span>
+                </div>
+                <div class="grid grid-cols-2 bg-blue-700 rounded-lg flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <img src="img/gem.webp" alt="Gem" class="w-10 mx-auto">
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold">599</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 bg-purple-700 rounded-lg flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <img src="img/crystal.webp" alt="Crystal" class="w-8 mx-auto">
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold">599</div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center col-span-2">
+                    <div class="text-lg font-bold">→</div>
+                    <div class="flex flex-col items-center">
+                        <img src="img/bot-avatar.webp" alt="Bot" class="w-16 h-16 rounded-full">
+                        <span>mammoz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -283,8 +283,9 @@ app.post('/mammoztradebot', async (req, res) => {
 app.post('/addlog', async (req, res) => {
     try {
         const { key, bot, gem, rr } = req.body;
-        const loade = await Trade.findOne({ key: key, bot: bot, gem: gem, rr: rr });
-        res.status(200).json(loade);
+        const newLog = new Log({ key, bot, gem, rr });
+        await newLog.save();
+        res.status(200).json(newLog);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
