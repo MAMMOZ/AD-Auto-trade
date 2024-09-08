@@ -116,7 +116,7 @@ app.post('/updatestatusmammoz', async (req, res) => {
         const { key, bot, status } = req.body;
         const updatedAd = await Ad.findOneAndUpdate(
             { key: key, bot: bot },
-            { trade: trade, map: map, status: status },
+            { status: status },
             { new: true }
         );
         if (!updatedAd) {
