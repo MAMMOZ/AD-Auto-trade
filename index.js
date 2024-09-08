@@ -45,7 +45,7 @@ app.post('/check', async (req, res) => {
         const { key, bot } = req.body;
         const adData = await Ad.findOne({ key: key, bot: bot });
         if (!adData) {
-            const logCount = await Log.countDocuments({ key: key, bot: bot, status: 0 });
+            const logCount = await Log.countDocuments({ key: key, mammoz: bot, status: 0 });
             if (logCount > 10) {
                 const newAd = await Ad.findOne({ 
                     key: key, 
