@@ -304,9 +304,14 @@ app.post('/mammoztradebot', async (req, res) => {
 app.post('/addlog', async (req, res) => {
     try {
         const { key, bot, gem, rr } = req.body;
-        const newLog = new Log({ key, bot, gem, rr });
-        await newLog.save();
-        res.status(200).json(newLog);
+        const same = await Log.findOne({ key: key, mammoz: mammoz });
+        if (!same){
+            const newLog = new Log({ key, bot, gem, rr });
+            await newLog.save();
+            res.status(200).json(newLog);
+        }else{
+            res.status(404).json("Have Log");
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -319,6 +324,18 @@ app.post('/getlog', async (req, res) => {
     try {
         const { key } = req.body;
         const loades = await Log.find({ key: key });
+
+        // for (a of loades){
+        //     const check = await Log.find({ key: key, bot:a.bot });
+
+        //     console.log(check.length);
+            
+        //     if (check.length > 1) {
+        //         const deletedTrade = await Log.findOneAndDelete({ _id: a._id,key: key });
+        //         console.log(deletedTrade);
+        //     }
+        // }
+
         let totalGem = 0;
         let totalRr = 0;
 
