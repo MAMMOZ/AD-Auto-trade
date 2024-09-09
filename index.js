@@ -1,8 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://clvxq1xxb0009bsmn300hbbb4:xbJxj7d5BEcq8T4rQMSPXKQZ@161.246.127.24:9061/?readPreference=primary&ssl=false', {
@@ -310,9 +313,34 @@ app.post('/addlog', async (req, res) => {
 });
 
 
+
+// GET Log TRADE
+app.post('/getlog', async (req, res) => {
+    try {
+        const { key } = req.body;
+        const loades = await Log.find({ key: key });
+        let totalGem = 0;
+        let totalRr = 0;
+
+        loades.forEach(item => {
+            totalGem += item.gem;
+            totalRr += item.rr;
+        });
+
+        res.status(200).json({
+            data: loades,
+            totalGem: totalGem,
+            totalRr: totalRr
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 app.get('/', async (req, res) => {
     try {
-        res.status(201).json("mamoz");
+        res.sendFile(path.join(__dirname, 'index.html'));
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
