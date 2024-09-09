@@ -223,7 +223,7 @@ app.post('/addtrade', async (req, res) => {
         for (const ad of ads) {
             const logCount = await Trade.countDocuments({ key: key, mammoz: ad.bot, status: 0 });
 
-            if (logCount < ad.trade) {
+            if (logCount < 1) {
                 // ถ้า logCount ยังไม่เกิน ให้สร้าง Log ใหม่
                 const newLog = new Trade({ key, bot, mammoz: ad.bot, gem, rr, map, status });
                 await newLog.save();
