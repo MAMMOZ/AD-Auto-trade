@@ -304,7 +304,7 @@ app.post('/mammoztradebot', async (req, res) => {
 app.post('/addlog', async (req, res) => {
     try {
         const { key, bot, gem, rr } = req.body;
-        const same = await Log.findOne({ key: key, mammoz: mammoz });
+        const same = await Log.findOne({ key: key, bot: bot });
         if (!same){
             const newLog = new Log({ key, bot, gem, rr });
             await newLog.save();
