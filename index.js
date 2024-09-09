@@ -323,18 +323,7 @@ app.post('/addlog', async (req, res) => {
 app.post('/getlog', async (req, res) => {
     try {
         const { key } = req.body;
-        const loades = await Log.find({ key: key });
-
-        // for (a of loades){
-        //     const check = await Log.find({ key: key, bot:a.bot });
-
-        //     console.log(check.length);
-            
-        //     if (check.length > 1) {
-        //         const deletedTrade = await Log.findOneAndDelete({ _id: a._id,key: key });
-        //         console.log(deletedTrade);
-        //     }
-        // }
+        const loades = await Log.find({ key: key }).sort({"_id" :-1});
 
         let totalGem = 0;
         let totalRr = 0;
