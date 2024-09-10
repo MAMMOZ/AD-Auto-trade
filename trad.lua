@@ -2,6 +2,7 @@ getgenv().key = "key"
 
 getgenv().Check = false
 
+local host = 'https://cm0obybgw0000mnbsdcdfu7qi.iservkmitl.tech'
 
 function jsonencode(data) 
     return game:GetService("HttpService"):JSONEncode(data)
@@ -120,7 +121,6 @@ local v_u_3 = require(game.ReplicatedStorage.Values)
 local p63 = v_u_9
 local tickz = tick()
 local plr = game.Players.LocalPlayer
-local host = 'https://cm0obybgw0000mnbsdcdfu7qi.iservkmitl.tech'
 function letfkinggo(p63, ...)
 	local a = {...}
     if a[1] == "NormalLobby" then
