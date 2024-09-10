@@ -335,6 +335,8 @@ app.post('/addstatus', async (req, res) => {
             await newLog.save();
             return res.status(200).json({ message: 'New Online added', data: newLog });
         } else {
+            existingLog.gem = gem;
+            existingLog.rr = rr;
             existingLog.status = 0;
             existingLog.updatedAt = Date.now();
             await existingLog.save();
