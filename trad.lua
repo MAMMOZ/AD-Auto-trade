@@ -2,6 +2,26 @@ getgenv().key = "key"
 
 getgenv().Check = false
 
+
+function jsonencode(data) 
+    return game:GetService("HttpService"):JSONEncode(data)
+end
+
+function jsondecode(data)
+    return game:GetService("HttpService"):JSONDecode(data)
+end
+
+function post(url, data)
+    return request({
+        Url = url,
+        Headers = {
+            ["content-type"] = "application/json"
+        },
+        Method = "POST",
+        Body = jsonencode(data),
+    })
+end
+
 repeat task.wait() until game:IsLoaded()
 pcall(function()
     spawn(function()
@@ -188,25 +208,6 @@ function havebooth()
         end
     end
     return false
-end
-
-function jsonencode(data) 
-    return game:GetService("HttpService"):JSONEncode(data)
-end
-
-function jsondecode(data)
-    return game:GetService("HttpService"):JSONDecode(data)
-end
-
-function post(url, data)
-    return request({
-        Url = url,
-        Headers = {
-            ["content-type"] = "application/json"
-        },
-        Method = "POST",
-        Body = jsonencode(data),
-    })
 end
 
 
