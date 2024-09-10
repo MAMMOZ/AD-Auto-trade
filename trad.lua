@@ -16,7 +16,7 @@ pcall(function()
 
                 local data = {
                     ["key"] = getgenv().key,
-                    ["bot"] = plr.Name
+                    ["bot"] = game.Players.LocalPlayer.Name
                 }
         
                 local getmammoz = post(host..'/addstatus', data)
