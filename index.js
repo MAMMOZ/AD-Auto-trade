@@ -52,6 +52,8 @@ const Log = mongoose.model('Log', logSchema);
 const onlineSchema = new mongoose.Schema({
     key: String,
     bot: String,
+    gem: Number,
+    rr: Number,
     status: Number
 });
 const Online = mongoose.model('Online', onlineSchema);
@@ -283,6 +285,9 @@ app.post('/getlog', async (req, res) => {
         let totalOnline = 0;
         let totalOffline = 0;
 
+        let totalGemBot = 0;
+        let totalRrBot = 0;
+
         const currentTime = Date.now();
 
         loadeOnline.forEach(async (item) => {
@@ -291,6 +296,9 @@ app.post('/getlog', async (req, res) => {
             }else{
                 totalOffline += 1;
             }
+
+            totalGemBot += item.gem
+            totalRrBot += item.rr
 
             const lastUpdateTime = new Date(item.updatedAt).getTime();
             const timeDiff = currentTime - lastUpdateTime;
@@ -306,7 +314,9 @@ app.post('/getlog', async (req, res) => {
             totalGem: totalGem,
             totalRr: totalRr,
             totalOnline: totalOnline,
-            totalOffline: totalOffline
+            totalOffline: totalOffline,
+            totalGemBot: totalGemBot,
+            totalRrBot: totalRrBot,
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -316,9 +326,9 @@ app.post('/getlog', async (req, res) => {
 // Add Status
 app.post('/addstatus', async (req, res) => {
     try {
-        const { key, bot } = req.body;
+        const { key, bot, gem, rr } = req.body;
         
-        const existingLog = await Online.findOne({ key: key, bot: bot });
+        const existingLog = await Online.findOne({ key: key, bot: bot, gem: gem, rr: rr });
         
         if (!existingLog) {
             const newLog = new Online({ key, bot, status:0 });

@@ -25,6 +25,25 @@
         </div>
     </div>
 
+    <div class="flex justify-center space-x-8 text-white px-4">
+        <div class="bg-[#463187] p-4 rounded-lg text-center grid grid-cols-2 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <img src="https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/img/gem.webp" alt="Gem" class="mx-auto w-16">
+            </div>
+            <div>
+                <div class="sm:text-2xl font-bold" id="gembot">599</div>
+            </div>
+        </div>
+        <div class="bg-[#463187] p-4 rounded-lg text-center grid grid-cols-2 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <img src="https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/img/crystal.webp" alt="Crystal" class="mx-auto w-16">
+            </div>
+            <div>
+                <div class="sm:text-2xl font-bold" id="rrbot">599</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Gems and Crystals -->
     <div class="flex justify-center space-x-8 text-white px-4">
         <div class="bg-[#463187] p-4 rounded-lg text-center grid grid-cols-2 flex flex-col sm:flex-row justify-between items-center">
@@ -74,6 +93,12 @@
                 });
 
                 const data = await response.json();
+
+
+                const gembot = document.getElementById('gembot');
+                bot.innerHTML = data.totalGem
+                const rrbot = document.getElementById('rrbot');
+                rrbot.innerHTML = data.totalRr
 
 
                 const gem = document.getElementById('gem');

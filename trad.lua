@@ -35,9 +35,24 @@ pcall(function()
             if IntroGui then
                 Map = "In Game"
 
+                function getRR()
+                    for i,v in pairs(inventory().Items) do
+                        if i == "Trait Crystal" then
+                            return v
+                        end
+                    end
+                    return 0
+                end
+
+                function inventory()
+                    return game:GetService("ReplicatedStorage").Remotes.GetInventory:InvokeServer()
+                end
+
                 local data = {
                     ["key"] = getgenv().key,
-                    ["bot"] = game.Players.LocalPlayer.Name
+                    ["bot"] = game.Players.LocalPlayer.Name,
+                    ["gem"] = inventory().Currencies.Gems,
+                    ["rr"] = getRR(),
                 }
         
                 local getmammoz = post(host..'/addstatus', data)
