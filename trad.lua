@@ -820,10 +820,10 @@ function Check()
                             end
                         end
                     else
-                        loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                     end
                 else
-                    loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                 end
             elseif checkk.goto == "Add Bot Now" then
                 if tonumber(inventory().Currencies.Gems) >= 20000 then
@@ -831,13 +831,13 @@ function Check()
                     print("Add Bot Now")
                     checkaddbot = AddBot()
                     if checkaddbot == "error bot add" then
-                        loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                     else
                         Check()
                         break
                     end
                 else
-                    loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                 end
             end
         end
