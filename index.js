@@ -49,41 +49,15 @@ const logSchema = new mongoose.Schema({
 });
 const Log = mongoose.model('Log', logSchema);
 
+const onlineSchema = new mongoose.Schema({
+    key: String,
+    bot: String,
+    status: Number
+});
+const Online = mongoose.model('Online', onlineSchema);
+
 app.use(bodyParser.json());
 
-// // Routes
-// // AD endpoint
-// // Check AD (BOT)
-// app.post('/check', async (req, res) => {
-//     try {
-//         const { key, bot } = req.body;
-//         const adData = await Ad.findOne({ key: key, bot: bot });
-//         if (!adData) {
-//             const logCount = await Log.countDocuments({ key: key, mammoz: bot, status: 0 });
-//             if (logCount > 10) {
-//                 const newAd = await Ad.findOne({ 
-//                     key: key, 
-//                     status: 0, 
-//                     trade: { $ne: 0 }, 
-//                     _id: { $ne: adData._id }
-//                 });
-//                 return res.status(404).json(newAd);
-//             }else{
-//                 const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
-//                 return res.status(404).json(statusZero);
-//             }
-//         }
-//         const statusZero = await Ad.findOne({ key:key, status: 0, trade: { $ne: 0 } });
-//         if (statusZero){
-//             return res.status(200).json(statusZero);
-//         }else{
-//             const statusZero = await Ad.findOne({ key:key, bot:bot});
-//             return res.status(200).json(statusZero);
-//         }
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// });
 // ADD AD (SERVER)
 app.post('/addmammoz', async (req, res) => {
     try {
@@ -145,23 +119,6 @@ app.post('/delemammoz', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
 });
-
-// // Routes
-// // Trade endpoint
-// // Get Trade (SERVER)
-// app.post('/trade', async (req, res) => {
-//     try {
-//         const { key, mammoz } = req.body;
-//         const adData = await Log.findOne({ key: key, mammoz: mammoz });
-//         if (!adData) {
-//             return res.status(404).json({ message: 'No data found' });
-//         }
-//         const statusZero = await Log.findOne({ status: 0});
-//         res.status(200).json(statusZero);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// });
 
 
 // Check Bot, Trade Go FUNCH
@@ -276,18 +233,6 @@ app.post('/deletrade', async (req, res) => {
     }
 });
 
-
-// // ถาม mammoz ต้องทำอะไร sell or trade
-// app.post('/trademammoz', async (req, res) => {
-//     try {
-//         const { key, bot } = req.body;
-//         const loade = await Trade.findOne({ key: key, bot: bot });
-//         res.status(200).json(loade);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// });
-
 // mammoz ถาม bot ต้องทำอะไร buy or trade
 app.post('/mammoztradebot', async (req, res) => {
     try {
@@ -342,6 +287,65 @@ app.post('/getlog', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+// Add Status
+app.post('/addstatus', async (req, res) => {
+    try {
+        const { key, bot } = req.body;
+        
+        const existingLog = await Online.findOne({ key: key, bot: bot });
+        
+        if (!existingLog) {
+            const newLog = new Online({ key, bot, status:0 });
+            await newLog.save();
+            return res.status(200).json({ message: 'New Online added', data: newLog });
+        } else {
+            existingLog.status = 0;
+            existingLog.updatedAt = Date.now();
+            await existingLog.save();
+            return res.status(200).json({ message: 'Online updated', data: existingLog });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// GetOnline
+app.post('/getonline', async (req, res) => {
+    try {
+        const { key } = req.body;
+        const loades = await Online.find({ key: key }).sort({"_id": -1});
+        let totalOnline = 0;
+        let totalOffline = 0;
+
+        const currentTime = Date.now();
+
+        loades.forEach(async (item) => {
+            if (item.status == 0){
+                totalOnline += 1;
+            }else{
+                totalOffline += 1;
+            }
+
+            const lastUpdateTime = new Date(item.updatedAt).getTime();
+            const timeDiff = currentTime - lastUpdateTime;
+
+            if (timeDiff > 30 * 60 * 1000 && item.status !== 2) {
+                item.status = 2;
+                await item.save();
+            }
+        });
+
+        res.status(200).json({
+            data: loades,
+            totalOnline: totalOnline,
+            totalOffline: totalOffline
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 
 app.get('/', async (req, res) => {

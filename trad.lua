@@ -859,6 +859,18 @@ pcall(function()
                     local IntroGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MatchIntroGui")
                     if IntroGui then
                         Map = "In Game"
+
+                        local data = {
+                            ["key"] = getgenv().key,
+                            ["bot"] = plr.Name
+                        }
+                
+                        local getmammoz = post(host..'/addstatus', data)
+                
+                        if getmammoz.StatusCode == 200 then
+                            print("Add Online")
+                        end
+
                         repeat task.wait() until game:IsLoaded()
                         _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
                         _G.SettingsAD = {
