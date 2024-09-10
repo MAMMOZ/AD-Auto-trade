@@ -9,6 +9,22 @@ pcall(function()
             local IntroGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MatchIntroGui")
             if IntroGui then
                 Map = "In Game"
+                repeat task.wait() until game:IsLoaded()
+                _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
+                _G.SettingsAD = {
+                    ["LeaveAtWave"] = 31,
+                    ["DelayStartLobby"] = 20,
+                    ["MethodLeave"] = "Sell",
+                    ["ReplayInStoryMode"] = false,
+                    ["BlackScreen"] = true,
+                    ["EquipBest"] = true,
+                    ["SpeedModifier"] = 1
+                }
+
+                getgenv().Key = "MARU-ADIG-JM3XH-PQI7-82ZVQ-MWMB"
+                getgenv().id = "969581952531316827"
+                getgenv().Script_Mode = "Kaitun_Script"
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
                 break
             else 
                 Map = "In Lobby"
@@ -29,8 +45,7 @@ pcall(function()
                         if pages.Enabled then
                             print("PAGES is enabled")
 
-                            -- repeat task.wait() until game:IsLoaded()
-                            -- wait(5)
+                            repeat task.wait() until game:IsLoaded()
                             _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
                             _G.SettingsAD = {
                                 ["LeaveAtWave"] = 31,
@@ -46,7 +61,7 @@ pcall(function()
                             getgenv().id = "969581952531316827"
                             getgenv().Script_Mode = "Kaitun_Script"
                             loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
-                            
+
                         end
                     else
                         local targetPlaceId = 17017769292
