@@ -102,9 +102,9 @@
 
 
                 const gembot = document.getElementById('gembot');
-                gembot.innerHTML = data.totalGemBot
+                gembot.innerHTML = data.totalGemBot ? data.totalGemBot : "0"
                 const rrbot = document.getElementById('rrbot');
-                rrbot.innerHTML = data.totalRrBot
+                rrbot.innerHTML = data.totalRrBot ? data.totalRrBot : "0"
 
 
                 const gem = document.getElementById('gem');
