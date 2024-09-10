@@ -61,6 +61,7 @@ pcall(function()
                         if pages.Enabled then
                             print("PAGES is enabled")
                             getgenv().Check = true
+                            break
                         end
                     else
                         local targetPlaceId = 17017769292
@@ -936,5 +937,6 @@ function Check()
     end
 end
 
-
-Check()
+spawn(function()
+    Check()
+end)
