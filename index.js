@@ -278,10 +278,35 @@ app.post('/getlog', async (req, res) => {
             totalRr += item.rr;
         });
 
+
+        const loadeOnline = await Online.find({ key: key }).sort({"_id": -1});
+        let totalOnline = 0;
+        let totalOffline = 0;
+
+        const currentTime = Date.now();
+
+        loadeOnline.forEach(async (item) => {
+            if (item.status == 0){
+                totalOnline += 1;
+            }else{
+                totalOffline += 1;
+            }
+
+            const lastUpdateTime = new Date(item.updatedAt).getTime();
+            const timeDiff = currentTime - lastUpdateTime;
+
+            if (timeDiff > 30 * 60 * 1000 && item.status !== 2) {
+                item.status = 2;
+                await item.save();
+            }
+        });
+        
         res.status(200).json({
             data: loades,
             totalGem: totalGem,
-            totalRr: totalRr
+            totalRr: totalRr,
+            totalOnline: totalOnline,
+            totalOffline: totalOffline
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -309,44 +334,6 @@ app.post('/addstatus', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
-// GetOnline
-app.post('/getonline', async (req, res) => {
-    try {
-        const { key } = req.body;
-        const loades = await Online.find({ key: key }).sort({"_id": -1});
-        let totalOnline = 0;
-        let totalOffline = 0;
-
-        const currentTime = Date.now();
-
-        loades.forEach(async (item) => {
-            if (item.status == 0){
-                totalOnline += 1;
-            }else{
-                totalOffline += 1;
-            }
-
-            const lastUpdateTime = new Date(item.updatedAt).getTime();
-            const timeDiff = currentTime - lastUpdateTime;
-
-            if (timeDiff > 30 * 60 * 1000 && item.status !== 2) {
-                item.status = 2;
-                await item.save();
-            }
-        });
-
-        res.status(200).json({
-            data: loades,
-            totalOnline: totalOnline,
-            totalOffline: totalOffline
-        });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
-
 
 app.get('/', async (req, res) => {
     try {

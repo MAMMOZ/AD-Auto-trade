@@ -849,7 +849,7 @@ repeat task.wait() until game:IsLoaded()
 pcall(function()
     spawn(function()
         local lobbyCount = 0 
-        local maxLobbyCount = 30
+        local maxLobbyCount = 15
 
         repeat task.wait() until game:IsLoaded()
         pcall(function()
@@ -897,7 +897,7 @@ pcall(function()
                     print("จำนวนครั้งที่เจอ 'In Lobby': " .. lobbyCount)
                     
                     if lobbyCount >= maxLobbyCount then
-                        print("เจอ 'In Lobby' ครบ 60 ครั้ง ออกจากลูป")
+                        print("เจอ 'In Lobby' ครบ ".. lobbyCount .. " ครั้ง ออกจากลูป")
 
                         local player = game:GetService("Players").LocalPlayer
                         local playerGui = player:FindFirstChild("PlayerGui")
@@ -911,7 +911,6 @@ pcall(function()
                             else
                                 local targetPlaceId = 17017769292
                                 if game.PlaceId == targetPlaceId then
-                                    wait(5)
                                     local Players = game:GetService("Players")
                                     local player = Players.LocalPlayer
                 
