@@ -1,5 +1,90 @@
 getgenv().key = "key"
 
+getgenv().Check = false
+
+repeat task.wait() until game:IsLoaded()
+pcall(function()
+    spawn(function()
+        local lobbyCount = 0 
+        local maxLobbyCount = 15
+
+        while true do
+            local Map 
+            local IntroGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MatchIntroGui")
+            if IntroGui then
+                Map = "In Game"
+
+                local data = {
+                    ["key"] = getgenv().key,
+                    ["bot"] = plr.Name
+                }
+        
+                local getmammoz = post(host..'/addstatus', data)
+        
+                if getmammoz.StatusCode == 200 then
+                    print("Add Online")
+                end
+
+                repeat task.wait() until game:IsLoaded()
+                _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
+                _G.SettingsAD = {
+                    ["LeaveAtWave"] = 31,
+                    ["DelayStartLobby"] = 20,
+                    ["MethodLeave"] = "Sell",
+                    ["ReplayInStoryMode"] = false,
+                    ["BlackScreen"] = true,
+                    ["EquipBest"] = true,
+                    ["SpeedModifier"] = 1
+                }
+
+                getgenv().Key = "MARU-ADIG-JM3XH-PQI7-82ZVQ-MWMB"
+                getgenv().id = "969581952531316827"
+                getgenv().Script_Mode = "Kaitun_Script"
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
+                break
+            else 
+                Map = "In Lobby"
+                lobbyCount = lobbyCount + 1 
+            end
+            
+            print("สถานะปัจจุบัน: " .. Map)
+            print("จำนวนครั้งที่เจอ 'In Lobby': " .. lobbyCount)
+            
+            if lobbyCount >= maxLobbyCount then
+                print("เจอ 'In Lobby' ครบ ".. lobbyCount .. " ครั้ง ออกจากลูป")
+
+                local player = game:GetService("Players").LocalPlayer
+                local playerGui = player:FindFirstChild("PlayerGui")
+                if playerGui then
+                    local pages = playerGui:FindFirstChild("PAGES")
+                    if pages then
+                        if pages.Enabled then
+                            print("PAGES is enabled")
+                            getgenv().Check = true
+                        end
+                    else
+                        local targetPlaceId = 17017769292
+                        if game.PlaceId == targetPlaceId then
+                            local Players = game:GetService("Players")
+                            local player = Players.LocalPlayer
+        
+                            if player then
+                                player:Kick("BUG SEVER by Sanbux")
+                            end
+                        end
+                        print("PAGES does not exist")
+                    end
+                else
+                    print("PlayerGui does not exist")
+                end
+                break 
+            end
+            
+            wait(1)
+        end
+    end)
+end)
+
 local UnitData = require(game:GetService("ReplicatedStorage").Modules.Bins.UnitData)
 local Values = require(game:GetService("ReplicatedStorage").Values) 
 -- 17490500437 -- trade
@@ -756,6 +841,12 @@ end
 
 function Check()
 
+    if not getgenv().Check then
+        print("not getgenv().Check")
+    end
+
+    print("getgenv().Check")
+
     while true do
 
         local data = {
@@ -845,90 +936,5 @@ function Check()
     end
 end
 
-repeat task.wait() until game:IsLoaded()
-pcall(function()
-    spawn(function()
-        local lobbyCount = 0 
-        local maxLobbyCount = 15
 
-        repeat task.wait() until game:IsLoaded()
-        pcall(function()
-            spawn(function()
-                while true do
-                    local Map 
-                    local IntroGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MatchIntroGui")
-                    if IntroGui then
-                        Map = "In Game"
-
-                        local data = {
-                            ["key"] = getgenv().key,
-                            ["bot"] = plr.Name
-                        }
-                
-                        local getmammoz = post(host..'/addstatus', data)
-                
-                        if getmammoz.StatusCode == 200 then
-                            print("Add Online")
-                        end
-
-                        repeat task.wait() until game:IsLoaded()
-                        _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
-                        _G.SettingsAD = {
-                            ["LeaveAtWave"] = 31,
-                            ["DelayStartLobby"] = 20,
-                            ["MethodLeave"] = "Sell",
-                            ["ReplayInStoryMode"] = false,
-                            ["BlackScreen"] = true,
-                            ["EquipBest"] = true,
-                            ["SpeedModifier"] = 1
-                        }
-
-                        getgenv().Key = "MARU-ADIG-JM3XH-PQI7-82ZVQ-MWMB"
-                        getgenv().id = "969581952531316827"
-                        getgenv().Script_Mode = "Kaitun_Script"
-                        loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/MaruBitkub/main/Mobile.lua"))()
-                        break
-                    else 
-                        Map = "In Lobby"
-                        lobbyCount = lobbyCount + 1 
-                    end
-                    
-                    print("สถานะปัจจุบัน: " .. Map)
-                    print("จำนวนครั้งที่เจอ 'In Lobby': " .. lobbyCount)
-                    
-                    if lobbyCount >= maxLobbyCount then
-                        print("เจอ 'In Lobby' ครบ ".. lobbyCount .. " ครั้ง ออกจากลูป")
-
-                        local player = game:GetService("Players").LocalPlayer
-                        local playerGui = player:FindFirstChild("PlayerGui")
-                        if playerGui then
-                            local pages = playerGui:FindFirstChild("PAGES")
-                            if pages then
-                                if pages.Enabled then
-                                    print("PAGES is enabled")
-                                    Check()
-                                end
-                            else
-                                local targetPlaceId = 17017769292
-                                if game.PlaceId == targetPlaceId then
-                                    local Players = game:GetService("Players")
-                                    local player = Players.LocalPlayer
-                
-                                    if player then
-                                        player:Kick("BUG SEVER by Sanbux")
-                                    end
-                                end
-                                print("PAGES does not exist")
-                            end
-                        else
-                            print("PlayerGui does not exist")
-                        end
-                        break 
-                    end
-                    
-                    wait(1)
-                end
-            end)
-        end)
-    end)
-end)
+Check()
