@@ -849,7 +849,7 @@ repeat task.wait() until game:IsLoaded()
 pcall(function()
     spawn(function()
         local lobbyCount = 0 
-        local maxLobbyCount = 60 
+        local maxLobbyCount = 20 
 
         repeat task.wait() until game:IsLoaded()
         pcall(function()
