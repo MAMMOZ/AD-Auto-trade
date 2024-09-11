@@ -275,6 +275,7 @@ app.post('/getlog', async (req, res) => {
 
         let totalGem = 0;
         let totalRr = 0;
+        let totalAdb = 0;
 
         loades.forEach(item => {
             totalGem += item.gem;
@@ -304,7 +305,9 @@ app.post('/getlog', async (req, res) => {
             const lastUpdateTime = new Date(item.updatedAt).getTime();
             const timeDiff = currentTime - lastUpdateTime;
 
-            if (timeDiff > 30 * 60 * 1000 && item.status !== 2) {
+            if (timeDiff > 60 * 60 * 1000 && item.status !== 2) {
+                totalAdb += 0;
+            }else if(timeDiff > 30 * 60 * 1000 && item.status !== 2){
                 item.status = 2;
                 await item.save();
             }
@@ -314,6 +317,7 @@ app.post('/getlog', async (req, res) => {
             data: loades,
             totalGem: totalGem,
             totalRr: totalRr,
+            totalAdb: totalAdb,
             totalOnline: totalOnline,
             totalOffline: totalOffline,
             totalGemBot: totalGemBot,
