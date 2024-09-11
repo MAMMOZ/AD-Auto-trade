@@ -298,18 +298,18 @@ app.post('/getlog', async (req, res) => {
             }else if (item.status == 2){
                 totalOffline += 1;
             }else if (item.status == 3){
-                item.status = 3;
+                totalAdb += 1;
             }
-
+            
             totalGemBot += item.gem
             totalRrBot += item.rr
-
+            
             const lastUpdateTime = new Date(item.updatedAt).getTime();
             const timeDiff = currentTime - lastUpdateTime;
-
+            
             if (timeDiff > 60 * 60 * 1000 && item.status !== 2 && item.status !== 3) {
+                item.status = 3;
                 await item.save();
-                totalAdb += 1;
             }else if(timeDiff > 30 * 60 * 1000 && item.status !== 2 && item.status !== 3){
                 item.status = 2;
                 await item.save();
