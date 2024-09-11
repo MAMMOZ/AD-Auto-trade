@@ -831,12 +831,6 @@ pcall(function()
 
                             function Check()
 
-                                if not getgenv().Check then
-                                    print("not getgenv().Check")
-                                end
-
-                                print("getgenv().Check")
-
                                 while true do
 
                                     local data = {
@@ -928,7 +922,11 @@ pcall(function()
 
                             pcall(function()
                                 spawn(function()
-                                    Check()
+                                    if getgenv().Check then
+                                        print("getgenv().Check")
+                                        Check()
+                                    end
+    
                                 end)
                             end)
 
