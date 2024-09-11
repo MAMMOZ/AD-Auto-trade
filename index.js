@@ -295,8 +295,10 @@ app.post('/getlog', async (req, res) => {
         loadeOnline.forEach(async (item) => {
             if (item.status == 0){
                 totalOnline += 1;
-            }else{
+            }else if (item.status == 2){
                 totalOffline += 1;
+            }else if (item.status == 3){
+                item.status = 3;
             }
 
             totalGemBot += item.gem
@@ -306,7 +308,6 @@ app.post('/getlog', async (req, res) => {
             const timeDiff = currentTime - lastUpdateTime;
 
             if (timeDiff > 60 * 60 * 1000 && item.status !== 2 && item.status !== 3) {
-                item.status = 3;
                 await item.save();
                 totalAdb += 1;
             }else if(timeDiff > 30 * 60 * 1000 && item.status !== 2 && item.status !== 3){
