@@ -950,6 +950,7 @@ function Check()
     end
 end
 
+repeat task.wait() until game:IsLoaded()
 spawn(function()
     Check()
 end)
