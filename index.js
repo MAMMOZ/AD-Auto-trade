@@ -331,7 +331,7 @@ app.post('/addstatus', async (req, res) => {
         const existingLog = await Online.findOne({ key: key, bot: bot });
         
         if (!existingLog) {
-            const newLog = new Online({ key, bot, gem, rr, status:0 });
+            const newLog = new Online({ key, bot, gem, rr, status:0, updatedAt:Date.now() });
             await newLog.save();
             return res.status(200).json({ message: 'New Online added', data: newLog });
         } else {
