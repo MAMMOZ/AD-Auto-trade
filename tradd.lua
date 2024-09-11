@@ -922,7 +922,7 @@ pcall(function()
 
                             pcall(function()
                                 spawn(function()
-                                    if getgenv().Check then
+                                    if getgenv().Check == true then
                                         print("getgenv().Check")
                                         Check()
                                     end

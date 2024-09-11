@@ -135,14 +135,14 @@ app.post('/check', async (req, res) => {
         }else{
             const checkBot = await Trade.findOne({ key: key, bot: bot });
 
-            const currentTime = Date.now();
-            const lastUpdateTime = new Date(item.updatedAt).getTime();
-            const timeDiff = currentTime - lastUpdateTime;
+            // const currentTime = Date.now();
+            // const lastUpdateTime = new Date(item.updatedAt).getTime();
+            // const timeDiff = currentTime - lastUpdateTime;
 
-            if (timeDiff > 6 * 60 * 1000) {
-                const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
-                console.log(deletedTrade);
-            }
+            // if (timeDiff > 6 * 60 * 1000) {
+            //     const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
+            //     console.log(deletedTrade);
+            // }
 
             if (checkBot){
                 res.status(200).json({"data": checkBot, "goto": "Bot Auto"}); // หา status แล้วทำสิ่งนั้น
