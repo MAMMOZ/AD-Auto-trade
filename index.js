@@ -305,7 +305,7 @@ app.post('/getlog', async (req, res) => {
             const lastUpdateTime = new Date(item.updatedAt).getTime();
             const timeDiff = currentTime - lastUpdateTime;
 
-            if (timeDiff > 60 * 60 * 1000 && item.status !== 2) {
+            if (timeDiff > 60 * 60 * 1000) {
                 totalAdb += 0;
             }else if(timeDiff > 30 * 60 * 1000 && item.status !== 2){
                 item.status = 2;
