@@ -34,7 +34,8 @@ const tradeSchema = new mongoose.Schema({
     gem: Number,
     rr: Number,
     map: Number,
-    status: Number
+    status: Number,
+    updatedAt: Date,
 });
 const Trade = mongoose.model('Trade', tradeSchema);
 
@@ -133,6 +134,16 @@ app.post('/check', async (req, res) => {
             res.status(200).json({"data": checktrade, "goto": "Mammoz"});
         }else{
             const checkBot = await Trade.findOne({ key: key, bot: bot });
+
+            const currentTime = Date.now();
+            const lastUpdateTime = new Date(item.updatedAt).getTime();
+            const timeDiff = currentTime - lastUpdateTime;
+
+            if (timeDiff > 6 * 60 * 1000) {
+                const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
+                console.log(deletedTrade);
+            }
+
             if (checkBot){
                 res.status(200).json({"data": checkBot, "goto": "Bot Auto"}); // หา status แล้วทำสิ่งนั้น
             }else{
@@ -192,7 +203,7 @@ app.post('/addtrade', async (req, res) => {
 
             if (logCount < 1) {
                 // ถ้า logCount ยังไม่เกิน ให้สร้าง Log ใหม่
-                const newLog = new Trade({ key, bot, mammoz: ad.bot, gem, rr, map, status });
+                const newLog = new Trade({ key, bot, mammoz: ad.bot, gem, rr, map, status, updatedAt:Date.now() });
                 await newLog.save();
 
                 return res.status(200).json(newLog);
