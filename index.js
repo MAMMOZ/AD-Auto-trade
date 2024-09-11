@@ -169,14 +169,18 @@ app.post('/check', async (req, res) => {
 
 
 // ADD Trade (BOT) AND ADD MAMMOZ AUTO เสร็จ
+const { Mutex } = require('async-mutex');
+const mutex = new Mutex();
+
 app.post('/addtrade', async (req, res) => {
+    const release = await mutex.acquire(); // ล็อค Mutex
     try {
         const { key, bot, gem, rr, map, status } = req.body;
         console.log(key, bot, gem, rr, map, status);
 
         // ค้นหา Ad ทั้งหมดที่มี status = 0 และ trade ไม่เป็น 0
-        const ads = await Ad.find({key:key, status: 0, trade: { $ne: 0 } });
-        
+        const ads = await Ad.find({ key: key, status: 0, trade: { $ne: 0 } });
+
         // ตรวจสอบว่าพบ Ad หรือไม่
         if (!ads.length) {
             return res.status(400).json({ message: "No valid Ad found." });
@@ -190,6 +194,7 @@ app.post('/addtrade', async (req, res) => {
                 // ถ้า logCount ยังไม่เกิน ให้สร้าง Log ใหม่
                 const newLog = new Trade({ key, bot, mammoz: ad.bot, gem, rr, map, status });
                 await newLog.save();
+
                 return res.status(200).json(newLog);
             }
         }
@@ -199,8 +204,11 @@ app.post('/addtrade', async (req, res) => {
 
     } catch (error) {
         return res.status(400).json({ message: error.message });
+    } finally {
+        release(); // ปลดล็อค Mutex
     }
 });
+
 
 // UPDATE STATUS Trade (BOT) เสร็จ
 app.post('/updatetrade', async (req, res) => {
