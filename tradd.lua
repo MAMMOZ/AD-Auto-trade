@@ -460,14 +460,16 @@ function TradeMammoz()
         local decodedBody = nil
     
         repeat
-            pcall(function()
-                decodedBody = jsondecode(getmammoz.Body)
+            local success, err = pcall(function()
+                if getmammoz and getmammoz.Body then
+                    decodedBody = jsondecode(getmammoz.Body)
+                else
+                    print("Error: Invalid response from API")
+                end
             end)
-
-            if not decodedBody then
-                print("Failed to decode JSON.")
-            elseif not decodedBody.status then
-                print("Decoded JSON but no 'status' field found.")
+        
+            if not success then
+                print("Error decoding JSON: ", err)
             end
 
             wait(10)
@@ -536,14 +538,16 @@ function TradeMammoz()
                 local decodedBody = nil
             
                 repeat
-                    pcall(function()
-                        decodedBody = jsondecode(getmammoz.Body)
+                    local success, err = pcall(function()
+                        if getmammoz and getmammoz.Body then
+                            decodedBody = jsondecode(getmammoz.Body)
+                        else
+                            print("Error: Invalid response from API")
+                        end
                     end)
-        
-                    if not decodedBody then
-                        print("Failed to decode JSON.")
-                    elseif not decodedBody.status then
-                        print("Decoded JSON but no 'status' field found.")
+                
+                    if not success then
+                        print("Error decoding JSON: ", err)
                     end
         
                     wait(10)
@@ -596,9 +600,18 @@ function SellMammoz()
         local getmammoz = post(host..'/mammoztradebot', data)
         local statusm = nil
         repeat
-            pcall(function()
-                statusm = jsondecode(getmammoz.Body)
+            local success, err = pcall(function()
+                if getmammoz and getmammoz.Body then
+                    statusm = jsondecode(getmammoz.Body)
+                else
+                    print("Error: Invalid response from API")
+                end
             end)
+        
+            -- ตรวจสอบว่าการ decode สำเร็จหรือไม่
+            if not success then
+                print("Error decoding JSON: ", err)
+            end
 
             wait(20)
         until statusm and statusm.status ~= nil
