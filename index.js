@@ -54,7 +54,8 @@ const onlineSchema = new mongoose.Schema({
     bot: String,
     gem: Number,
     rr: Number,
-    status: Number
+    status: Number,
+    updatedAt: Date,
 });
 const Online = mongoose.model('Online', onlineSchema);
 
