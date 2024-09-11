@@ -112,15 +112,15 @@
                 gem.innerHTML = data.totalGem
                 const rr = document.getElementById('rr');
                 rr.innerHTML = data.totalRr
-                const adb = document.getElementById('adb');
-                adb.innerHTML = data.totalAdb
-
+                
                 const online = document.getElementById('online');
                 online.innerHTML = "ONLINE : "+data.totalOnline
-
+                
                 const offline = document.getElementById('offline');
                 offline.innerHTML = "OFFLINE : "+data.totalOffline
-
+                
+                const adb = document.getElementById('adb');
+                adb.innerHTML = "ADB : "+data.totalAdb
 
 
                 // Check if we received valid data
