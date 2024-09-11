@@ -134,16 +134,6 @@ app.post('/check', async (req, res) => {
             res.status(200).json({"data": checktrade, "goto": "Mammoz"});
         }else{
             const checkBot = await Trade.findOne({ key: key, bot: bot });
-
-            // const currentTime = Date.now();
-            // const lastUpdateTime = new Date(item.updatedAt).getTime();
-            // const timeDiff = currentTime - lastUpdateTime;
-
-            // if (timeDiff > 6 * 60 * 1000) {
-            //     const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
-            //     console.log(deletedTrade);
-            // }
-
             if (checkBot){
                 res.status(200).json({"data": checkBot, "goto": "Bot Auto"}); // หา status แล้วทำสิ่งนั้น
             }else{
@@ -260,6 +250,14 @@ app.post('/mammoztradebot', async (req, res) => {
     try {
         const { key, mammoz } = req.body;
         const loade = await Trade.findOne({ key: key, mammoz: mammoz });
+        const currentTime = Date.now();
+        const lastUpdateTime = new Date(loade.updatedAt).getTime();
+        const timeDiff = currentTime - lastUpdateTime;
+
+        if (timeDiff > 6 * 60 * 1000) {
+            const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
+            console.log(deletedTrade);
+        }
         res.status(200).json(loade);
     } catch (error) {
         res.status(500).json({ message: error.message });
