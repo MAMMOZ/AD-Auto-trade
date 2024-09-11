@@ -186,45 +186,6 @@ pcall(function()
                                 return false
                             end
 
-
-                            local function GetCenterPosition(guiElement)
-                                local absPos = guiElement.AbsolutePosition
-                                local absSize = guiElement.AbsoluteSize
-                                local x, y = absPos.X, absPos.Y
-                                local centerX, centerY = x + absSize.X / 2, y + absSize.Y / 2
-                                return centerX, centerY
-                            end
-
-                            local RunService = game:GetService("RunService")
-                            local function ClickAtPosition(x, y)
-                                game:GetService("VirtualInputManager"):SendMouseButtonEvent(x, y, 0, true, game, 1)
-                                wait(0.2)
-                                game:GetService("VirtualInputManager"):SendMouseButtonEvent(x, y, 0, false, game, 1)
-                            end
-
-                            local function ClickButtonBack()
-                                local plr = game.Players.LocalPlayer
-                                local promptScreenGui = plr.PlayerGui:FindFirstChild("PromptGui")
-                                if promptScreenGui then
-                                    local promptDefault = promptScreenGui:FindFirstChild("PromptDefault")
-                                    if promptDefault then
-                                        local backButton = promptDefault.Holder.Options:FindFirstChild("Back")
-                                        if backButton and backButton.Name == "Back" then
-                                            local X, Y = GetCenterPosition(backButton)
-                                            ClickAtPosition(X - 20, Y + 40)
-                                        end
-                                    end
-                                end
-                            end
-
-
-                            function click(a)
-                                if a then
-                                    game:GetService("VirtualInputManager"):SendMouseButtonEvent(a.AbsolutePosition.X+a.AbsoluteSize.X/2,a.AbsolutePosition.Y+50,0,true,a,1)
-                                    game:GetService("VirtualInputManager"):SendMouseButtonEvent(a.AbsolutePosition.X+a.AbsoluteSize.X/2,a.AbsolutePosition.Y+50,0,false,a,1)
-                                end
-                            end
-
                             function checkBack()
                                 local playerGui = game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
                                 local PromptGui = playerGui and playerGui:FindFirstChild("PromptGui")
@@ -472,8 +433,6 @@ pcall(function()
 
                                         if checkBack() then
                                             print("Have Back")
-                                            -- wait(5)
-                                            -- ClickButtonBack()
                                             exit = false
                                         end
 
