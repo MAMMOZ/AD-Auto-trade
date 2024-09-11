@@ -175,7 +175,7 @@ app.post('/addtrade', async (req, res) => {
         console.log(key, bot, gem, rr, map, status);
 
         // ค้นหา Ad ทั้งหมดที่มี status = 0 และ trade ไม่เป็น 0
-        const ads = await Ad.find({ status: 0, trade: { $ne: 0 } });
+        const ads = await Ad.find({key:key, status: 0, trade: { $ne: 0 } });
         
         // ตรวจสอบว่าพบ Ad หรือไม่
         if (!ads.length) {
