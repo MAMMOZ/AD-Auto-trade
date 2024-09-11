@@ -679,7 +679,7 @@ pcall(function()
                                                 end
 
                                                 -- update status trade
-                                                UpdateStatusBot(3)
+                                                -- UpdateStatusBot(3)
 
                                                 shouldStop = false
 
