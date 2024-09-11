@@ -259,7 +259,7 @@ app.post('/mammoztradebot', async (req, res) => {
             update.status = 0
             await update.save();
 
-            const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
+            const deletedTrade = await Trade.findOneAndDelete({ key: key, mammoz: mammoz });
             console.log(deletedTrade);
 
 
