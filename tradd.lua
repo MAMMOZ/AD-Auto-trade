@@ -926,12 +926,11 @@ pcall(function()
                                 end
                             end
 
-                            repeat task.wait() until game:IsLoaded()
-                            spawn(function()
-                                Check()
+                            pcall(function()
+                                spawn(function()
+                                    Check()
+                                end)
                             end)
-
-
 
                             break
                         end
