@@ -421,10 +421,10 @@ function TradeMammoz()
                                 end
                             end
                         else
-                            loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                         end
                     else
-                        loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                     end
                 elseif checkk.goto == "Add Bot Now" then
                     if tonumber(inventory().Currencies.Gems) >= 20000 then
@@ -432,13 +432,13 @@ function TradeMammoz()
                         print("Add Bot Now")
                         checkaddbot = AddBot()
                         if checkaddbot == "error bot add" then
-                            loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                         else
                             Check()
                             break
                         end
                     else
-                        loadstring(game:HttpGet("https://pastebin.com/raw/hB2EhFhT"))()
+                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
                     end
                 end
             end
@@ -688,8 +688,6 @@ function TradeBot(name)
                 wait(20)
 
                 if getRR() == 0 then
-                    -- update status trade
-                    UpdateStatusBot(3)
 
                     local data = {
                         ["key"] = getgenv().key,
@@ -704,9 +702,10 @@ function TradeBot(name)
                         print("error bot dele trade")
                     end
 
-                    shouldStop = false
+                    -- update status trade
+                    UpdateStatusBot(3)
 
-                    wait(7)
+                    shouldStop = false
 
                     if checkBack() then
                         print("Have Back")
