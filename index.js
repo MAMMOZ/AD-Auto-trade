@@ -255,8 +255,14 @@ app.post('/mammoztradebot', async (req, res) => {
         const timeDiff = currentTime - lastUpdateTime;
 
         if (timeDiff > 6 * 60 * 1000) {
+            const update = await Ad.findOne({ key: key, bot: loade.mammoz });
+            update.status = 0
+            await update.save();
+
             const deletedTrade = await Trade.findOneAndDelete({ key: key, bot: bot });
             console.log(deletedTrade);
+
+
         }
         res.status(200).json(loade);
     } catch (error) {
