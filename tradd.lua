@@ -552,7 +552,7 @@ pcall(function()
 
                                     -- print(statusm)
                                     
-                                    if jsondecode(getmammoz.Body) ~= nil and jsondecode(getmammoz.Body).status == 1 and statusm.gem then  -- ตรวจสอบว่า status ถูกต้อง
+                                    if jsondecode(getmammoz.Body) ~= nil and jsondecode(getmammoz.Body).status == 1 and jsondecode(getmammoz.Body).gem then  -- ตรวจสอบว่า status ถูกต้อง
                                         -- ขายของ
                                         for i,v in pairs(inventory().Units) do
                                             if v.Type == "Electric Cyborg" or v.Type == "Legion Veteran" or v.Type == "Legion Assassin" then
@@ -566,7 +566,7 @@ pcall(function()
                                                                         ["Class"] = "Units"
                                                                     }
                                                                 },
-                                                                ["Price"] = tonumber(statusm.gem) -- ใช้ statusm.gem แทน getmammoz.Body
+                                                                ["Price"] = tonumber(jsondecode(getmammoz.Body).gem) -- ใช้ statusm.gem แทน getmammoz.Body
                                                             }
                                                         }
                                                         letfkinggo(p63.SELL_BOOTH_ITEMS, args[2])
