@@ -288,6 +288,8 @@ pcall(function()
                                 end
                             end
 
+                            getgenv().autotrademammoz = false
+
                             function TradeMammoz()
                                 --กดเทรด (Server)
                                 local exit = true
@@ -434,6 +436,7 @@ pcall(function()
                                         if checkBack() then
                                             print("Have Back")
                                             exit = false
+                                            getgenv().autotrademammoz =false
                                         end
 
                                         wait(10)
@@ -504,7 +507,6 @@ pcall(function()
                                 end)
                             end
 
-                            getgenv().autotrademammoz = false
 
                             function SellMammoz()
                                 local stop = true
