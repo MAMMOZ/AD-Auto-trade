@@ -438,9 +438,7 @@ pcall(function()
                                             exit = false
                                             getgenv().autotrademammoz =false
                                         end
-
-                                        wait(10)
-
+                                        
                                         Check()
 
                                     end
@@ -517,7 +515,7 @@ pcall(function()
                                         for i,v in pairs(game:GetService("Workspace").BoothLocations:GetChildren()) do
                                             if scanbooth(v) == false and havebooth() == false then
                                                 plr.Character.HumanoidRootPart.CFrame = v.CFrame
-                                                wait(1)
+                                                wait(3)
                                                 local tickn = tick()
                                                 repeat task.wait()
                                                     spawn(function()
@@ -578,11 +576,11 @@ pcall(function()
                                                 end
                                             end
                                         end
-                                        -- if getgenv().autotrademammoz then
-                                        stop = false
-                                        UpdateStatusMammoz(2)
-                                        TradeMammoz()
-                                        -- end
+                                        if getgenv().autotrademammoz then
+                                            stop = false
+                                            UpdateStatusMammoz(2)
+                                            TradeMammoz()
+                                        end
                                     else
                                         print("Status is not 0, trying again in 15 seconds...")
                                         wait(15)  -- รอ 15 วินาทีก่อนตรวจสอบอีกครั้ง
@@ -651,6 +649,7 @@ pcall(function()
                                                     exit = false
                                                 end
 
+                                                exit = false
                                                 letfkinggo(p63.GAME_MODE_SELECTED_CTS, "NormalLobby")
                                             end
 
