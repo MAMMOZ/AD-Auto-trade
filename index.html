@@ -168,7 +168,11 @@
         }
 
         // Call the function to fetch data when the page loads
-        document.addEventListener('DOMContentLoaded', fetchBotData);
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchBotData(); // เรียกฟังก์ชันครั้งแรกเมื่อโหลดหน้าเว็บ
+            setInterval(fetchBotData, 20000); // เรียกฟังก์ชันซ้ำทุกๆ 20 วินาที
+        });
+
     </script>
 </body>
 </html>
