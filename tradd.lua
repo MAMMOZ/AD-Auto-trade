@@ -543,13 +543,14 @@ pcall(function()
                                             end
                                         end)
                                     
-                                        -- ตรวจสอบว่าการ decode สำเร็จหรือไม่
                                         if not success then
                                             print("Error decoding JSON: ", err)
                                         end
 
                                         wait(20)
                                     until statusm and statusm.status ~= nil
+
+                                    print(statusm)
                                     
                                     if statusm.status == 1 then  -- ตรวจสอบว่า status ถูกต้อง
                                         -- ขายของ
