@@ -259,7 +259,7 @@ app.post('/mammoztradebot', async (req, res) => {
             const lastUpdateTime = new Date(loade.updatedAt).getTime();
             const timeDiff = currentTime - lastUpdateTime;
             
-            if (timeDiff > 6 * 60 * 1000) {
+            if (timeDiff > 10 * 60 * 1000) {
                 const update = await Ad.findOne({ key: key, bot: loade.mammoz });
                 update.status = 0
                 await update.save();

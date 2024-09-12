@@ -573,16 +573,16 @@ pcall(function()
                                                         }
                                                         letfkinggo(p63.SELL_BOOTH_ITEMS, args[2])
 
-                                                        getgenv().autotrademammoz = true
+                                                        -- getgenv().autotrademammoz = true
                                                     end
                                                 end
                                             end
                                         end
-                                        if getgenv().autotrademammoz then
-                                            stop = false
-                                            UpdateStatusMammoz(2)
-                                            TradeMammoz()
-                                        end
+                                        -- if getgenv().autotrademammoz then
+                                        stop = false
+                                        UpdateStatusMammoz(2)
+                                        TradeMammoz()
+                                        -- end
                                     else
                                         print("Status is not 0, trying again in 15 seconds...")
                                         wait(15)  -- รอ 15 วินาทีก่อนตรวจสอบอีกครั้ง
