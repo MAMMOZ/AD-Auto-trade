@@ -254,19 +254,21 @@ app.post('/mammoztradebot', async (req, res) => {
     try {
         const { key, mammoz } = req.body;
         const loade = await Trade.findOne({ key: key, mammoz: mammoz });
-        const currentTime = Date.now();
-        const lastUpdateTime = new Date(loade.updatedAt).getTime();
-        const timeDiff = currentTime - lastUpdateTime;
-
-        if (timeDiff > 6 * 60 * 1000) {
-            const update = await Ad.findOne({ key: key, bot: loade.mammoz });
-            update.status = 0
-            await update.save();
-
-            const deletedTrade = await Trade.findOneAndDelete({ key: key, mammoz: mammoz });
-            console.log(deletedTrade);
-
-
+        if (loade.updatedAt){
+            const currentTime = Date.now();
+            const lastUpdateTime = new Date(loade.updatedAt).getTime();
+            const timeDiff = currentTime - lastUpdateTime;
+            
+            if (timeDiff > 6 * 60 * 1000) {
+                const update = await Ad.findOne({ key: key, bot: loade.mammoz });
+                update.status = 0
+                await update.save();
+                
+                const deletedTrade = await Trade.findOneAndDelete({ key: key, mammoz: mammoz });
+                console.log(deletedTrade);
+                
+                
+            }
         }
         res.status(200).json(loade);
     } catch (error) {
