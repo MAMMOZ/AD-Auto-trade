@@ -127,8 +127,12 @@
                 if (Array.isArray(data.data)) {
                     const botTable = document.getElementById('botTable');
 
+                    
                     // Loop through each bot and append its data to the table
-                    data.data.forEach(bot => {
+                    data.data.forEach((bot, index) => {
+                        if (index >= 50) {
+                            return; // Exit the loop
+                        }
                         botTable.innerHTML += `
                             <div class="flex flex-col items-center">
                                 <img src="https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/img/bot-avatar.webp" alt="Bot" class="w-16 h-16 rounded-full">
