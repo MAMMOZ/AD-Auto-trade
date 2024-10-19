@@ -533,8 +533,10 @@ pcall(function()
                                     }
                                 
                                     local getmammoz = post(host..'/mammoztradebot', data)
+
+                                    print(jsondecode(getmammoz.Body).status)
                             
-                                    if jsondecode(getmammoz.Body) ~= nil and jsondecode(getmammoz.Body).status == 1 then  -- ตรวจสอบว่า status ถูกต้อง
+                                    if jsondecode(getmammoz.Body).status == 1 then  -- ตรวจสอบว่า status ถูกต้อง
                                         -- ขายของ
                                         for i,v in pairs(inventory().Units) do
                                             if v.Type == "Electric Cyborg" or v.Type == "Legion Veteran" or v.Type == "Legion Assassin" then
