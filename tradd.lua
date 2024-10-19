@@ -808,6 +808,36 @@ pcall(function()
                                         if checkk.goto == "Mammoz" then
                                             print("Mammoz")
                                             print(checkk.data.status)
+
+                                                    -- ดูจำนวนบูสที่ตั้งขายได้ เช่น 4
+                                            local function getTradeLimit()
+                                                if type(v_u_3.TRADE_LIMITS) == "table" and type(v_u_3.TRADE_LIMITS.Get) == "function" then
+                                                    local tradeLimits = v_u_3.TRADE_LIMITS:Get()
+                                                    if type(tradeLimits.Sales) == "number" then
+                                                        return tradeLimits.Sales
+                                                    end
+                                                end
+                                                return tonumber(string.match(game:GetService("Players").LocalPlayer.PlayerGui.HUD.TradeLimitHUDMobile.TextLabel.Text, "%d+"))
+                                            end
+
+                                            function UpdateStatusMammoz(newstatus)
+                                                local data = {
+                                                    ["key"] = getgenv().key,
+                                                    ["bot"] = plr.Name,
+                                                    ["trade"] = getTradeLimit(),
+                                                    ["map"] = game.PlaceId,
+                                                    ["status"] = newstatus
+                                                }
+                                            
+                                                local getmammoz = post(host..'/updatemammoz', data)
+                                            
+                                                if getmammoz.StatusCode == 200 then
+                                                    return "update status bot suceess"
+                                                else
+                                                    return "error bot update status"
+                                                end
+                                            end
+                                                    
                                             if game.PlaceId ~= 17490500437 then
                                                 letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
                                                 UpdateStatusMammoz(0)
