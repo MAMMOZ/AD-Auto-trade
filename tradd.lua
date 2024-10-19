@@ -296,7 +296,7 @@ pcall(function()
 
                                 function dmm()
 
-                                    wait(15)
+                                    wait(40)
 
                                     local data = {
                                         ["key"] = getgenv().key,
