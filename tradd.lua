@@ -471,11 +471,11 @@ pcall(function()
                                             stop = false
                                             UpdateStatusMammoz(2)
                                             TradeMammoz()
+                                            break
                                         end
                                     else
                                         print("Status is not 0, trying again in 15 seconds...")
-                                        wait(15)  -- รอ 15 วินาทีก่อนตรวจสอบอีกครั้ง
-
+                                        wait(45)
                                         UpdateStatusMammoz(0)
                                     end
                                 end
