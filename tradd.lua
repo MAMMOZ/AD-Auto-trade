@@ -346,8 +346,6 @@ pcall(function()
                                             exit = false
                                             getgenv().autotrademammoz =false
                                         end
-                                        
-                                        Check()
 
                                     end
                                 end
