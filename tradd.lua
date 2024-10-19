@@ -533,25 +533,7 @@ pcall(function()
                                     }
                                 
                                     local getmammoz = post(host..'/mammoztradebot', data)
-                                    -- local statusm = nil
-                                    -- repeat
-                                    --     local success, err = pcall(function()
-                                    --         if getmammoz and getmammoz.Body then
-                                    --             statusm = jsondecode(getmammoz.Body)
-                                    --         else
-                                    --             print("Error: Invalid response from API")
-                                    --         end
-                                    --     end)
-                                    
-                                    --     if not success then
-                                    --         print("Error decoding JSON: ", err)
-                                    --     end
-
-                                    --     wait(20)
-                                    -- until statusm and statusm.status ~= nil
-
-                                    -- print(statusm)
-                                    
+                            
                                     if jsondecode(getmammoz.Body) ~= nil and jsondecode(getmammoz.Body).status == 1 then  -- ตรวจสอบว่า status ถูกต้อง
                                         -- ขายของ
                                         for i,v in pairs(inventory().Units) do
@@ -584,8 +566,6 @@ pcall(function()
                                     else
                                         print("Status is not 0, trying again in 15 seconds...")
                                         wait(15)  -- รอ 15 วินาทีก่อนตรวจสอบอีกครั้ง
-                                        stop = false
-                                        SellMammoz()
                                     end
                                 end
                             end
