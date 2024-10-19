@@ -845,8 +845,8 @@ pcall(function()
                                             if tonumber(checkk.data.status) == 0 then
                                                 if game.PlaceId ~= 17490500437 then
                                                     letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
-                                                    UpdateStatusMammoz(0)
                                                 end
+                                                UpdateStatusMammoz(1)
                                             elseif tonumber(checkk.data.status) == 1 then
                                                 -- Go Sell Mammoz
                                                 SellMammoz()
