@@ -584,6 +584,8 @@ pcall(function()
                                     else
                                         print("Status is not 0, trying again in 15 seconds...")
                                         wait(15)  -- รอ 15 วินาทีก่อนตรวจสอบอีกครั้ง
+                                        stop = false
+                                        SellMammoz()
                                     end
                                 end
                             end
