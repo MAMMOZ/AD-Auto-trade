@@ -301,6 +301,7 @@ app.post('/getlog', async (req, res) => {
     try {
         const { key } = req.body;
         const loades = await Log.find({ key: key }).sort({"_id" :-1});
+        const tradenow = await Trade.find({ key: key }).sort({"_id" :-1});
 
         let totalGem = 0;
         let totalRr = 0;
@@ -347,6 +348,7 @@ app.post('/getlog', async (req, res) => {
         
         res.status(200).json({
             data: loades,
+            tradenow: tradenow,
             totalGem: totalGem,
             totalRr: totalRr,
             totalAdb: totalAdb,
