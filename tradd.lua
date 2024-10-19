@@ -843,20 +843,21 @@ pcall(function()
                                             if game.PlaceId ~= 17490500437 then
                                                 letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
                                                 UpdateStatusMammoz(0)
-                                            end
-                                            if tonumber(checkk.data.status) == 0 then
-                                                if game.PlaceId ~= 17490500437 then
-                                                    letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                            else
+                                                if tonumber(checkk.data.status) == 0 then
+                                                    if game.PlaceId ~= 17490500437 then
+                                                        letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                    end
+                                                    UpdateStatusMammoz(1)
+                                                elseif tonumber(checkk.data.status) == 1 then
+                                                    -- Go Sell Mammoz
+                                                    SellMammoz()
+                                                    break
+                                                elseif tonumber(checkk.data.status) == 2 then
+                                                    -- Go Trade Mammoz
+                                                    TradeMammoz()
+                                                    break
                                                 end
-                                                UpdateStatusMammoz(1)
-                                            elseif tonumber(checkk.data.status) == 1 then
-                                                -- Go Sell Mammoz
-                                                SellMammoz()
-                                                break
-                                            elseif tonumber(checkk.data.status) == 2 then
-                                                -- Go Trade Mammoz
-                                                TradeMammoz()
-                                                break
                                             end
                                         elseif checkk.goto == "Bot Auto" then
                                             if tonumber(inventory().Currencies.Gems) >= 20000 or tonumber(getRR()) >= 250 then
