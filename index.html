@@ -127,6 +127,7 @@
                 if (Array.isArray(data.data)) {
                     const botTable = document.getElementById('botTable');
 
+                    botTable.innerHTML = '';
                     
                     // Loop through each bot and append its data to the table
                     data.data.forEach((bot, index) => {
