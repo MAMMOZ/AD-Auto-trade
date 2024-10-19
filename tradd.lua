@@ -351,11 +351,9 @@ pcall(function()
                                                 elseif tonumber(checkk.data.status) == 1 then
                                                     -- Go Sell Mammoz
                                                     SellMammoz()
-                                                    break
                                                 elseif tonumber(checkk.data.status) == 2 then
                                                     -- Go Trade Mammoz
                                                     TradeMammoz()
-                                                    break
                                                 end
                                             end
                                         end
