@@ -462,7 +462,7 @@ pcall(function()
                                                         }
                                                         letfkinggo(p63.SELL_BOOTH_ITEMS, args[2])
 
-                                                        -- getgenv().autotrademammoz = true
+                                                        getgenv().autotrademammoz = true
                                                     end
                                                 end
                                             end
