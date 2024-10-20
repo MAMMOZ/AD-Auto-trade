@@ -288,6 +288,86 @@ pcall(function()
                                 end
                             end
 
+                            function SellMammoz()
+                                local stop = true
+                                while stop do
+                                    print("sell")
+
+                                    if havebooth() == false then
+                                        for i,v in pairs(game:GetService("Workspace").BoothLocations:GetChildren()) do
+                                            if scanbooth(v) == false and havebooth() == false then
+                                                plr.Character.HumanoidRootPart.CFrame = v.CFrame
+                                                wait(3)
+                                                local tickn = tick()
+                                                repeat task.wait()
+                                                    spawn(function()
+                                                        game:GetService("VirtualInputManager"):SendKeyEvent(true, 101, false, game)
+                                                    end)
+                                                until tick() - tickn >= 5
+                                            end
+                                        end
+                                    else
+                                        for i,v in pairs(scaninbooth2(game.Players.LocalPlayer.UserId)) do
+                                            if i > 1 then
+                                                local args = {
+                                                    [1] = getremote("REMOVE_BOOTH_ITEM"),
+                                                    [2] = v
+                                                }
+                                                letfkinggo(p63.REMOVE_BOOTH_ITEM, args[2])
+                                                wait(5)
+                                            end
+                                        end 
+                                    end
+
+                                    --ทำการวาป ไปที่บูส (Server)
+                                    local data = {
+                                        ["key"] = getgenv().key,
+                                        ["mammoz"] = plr.Name
+                                    }
+                                
+                                    local getmammoz = post(host..'/mammoztradebot', data)
+
+                                    local response = jsondecode(getmammoz.Body)  -- แทนที่ด้วยตัวแปรเพื่อใช้งานซ้ำ
+                                    print(response.status)
+                            
+                                    if response.status == 1 then  -- ตรวจสอบว่า status ถูกต้อง
+                                        -- ขายของ
+                                        for i,v in pairs(inventory().Units) do
+                                            if v.Type == "Electric Cyborg" or v.Type == "Legion Veteran" or v.Type == "Legion Assassin" then
+                                                if scaninbooth(game.Players.LocalPlayer.UserId)[i] == nil then
+                                                    if #scaninbooth2(game:GetService("Players"):GetUserIdFromNameAsync(plr.Name)) < 5 then
+                                                        local args = {
+                                                            [1] = getremote("SELL_BOOTH_ITEMS"),
+                                                            [2] = {
+                                                                ["Items"] = {
+                                                                    [tostring(i)] = {
+                                                                        ["Class"] = "Units"
+                                                                    }
+                                                                },
+                                                                ["Price"] = tonumber(jsondecode(getmammoz.Body).gem) -- ใช้ statusm.gem แทน getmammoz.Body
+                                                            }
+                                                        }
+                                                        letfkinggo(p63.SELL_BOOTH_ITEMS, args[2])
+
+                                                        getgenv().autotrademammoz = true
+                                                    end
+                                                end
+                                            end
+                                        end
+                                        if getgenv().autotrademammoz then
+                                            stop = false
+                                            UpdateStatusMammoz(2)
+                                            TradeMammoz()
+                                            break
+                                        end
+                                    else
+                                        print("Status is not 0, trying again in 15 seconds...")
+                                        wait(45)
+                                        UpdateStatusMammoz(0)
+                                    end
+                                end
+                            end
+
                             getgenv().autotrademammoz = false
 
                             function TradeMammoz()
@@ -346,6 +426,9 @@ pcall(function()
                                                 if tonumber(checkk.data.status) == 0 then
                                                     if game.PlaceId ~= 17490500437 then
                                                         letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                    else
+                                                        UpdateStatusMammoz(1)
+                                                        SellMammoz()
                                                     end
                                                     UpdateStatusMammoz(1)
                                                 elseif tonumber(checkk.data.status) == 1 then
@@ -477,87 +560,6 @@ pcall(function()
                                         end
                                     end
                                 end)
-                            end
-
-
-                            function SellMammoz()
-                                local stop = true
-                                while stop do
-                                    print("sell")
-
-                                    if havebooth() == false then
-                                        for i,v in pairs(game:GetService("Workspace").BoothLocations:GetChildren()) do
-                                            if scanbooth(v) == false and havebooth() == false then
-                                                plr.Character.HumanoidRootPart.CFrame = v.CFrame
-                                                wait(3)
-                                                local tickn = tick()
-                                                repeat task.wait()
-                                                    spawn(function()
-                                                        game:GetService("VirtualInputManager"):SendKeyEvent(true, 101, false, game)
-                                                    end)
-                                                until tick() - tickn >= 5
-                                            end
-                                        end
-                                    else
-                                        for i,v in pairs(scaninbooth2(game.Players.LocalPlayer.UserId)) do
-                                            if i > 1 then
-                                                local args = {
-                                                    [1] = getremote("REMOVE_BOOTH_ITEM"),
-                                                    [2] = v
-                                                }
-                                                letfkinggo(p63.REMOVE_BOOTH_ITEM, args[2])
-                                                wait(5)
-                                            end
-                                        end 
-                                    end
-
-                                    --ทำการวาป ไปที่บูส (Server)
-                                    local data = {
-                                        ["key"] = getgenv().key,
-                                        ["mammoz"] = plr.Name
-                                    }
-                                
-                                    local getmammoz = post(host..'/mammoztradebot', data)
-
-                                    local response = jsondecode(getmammoz.Body)  -- แทนที่ด้วยตัวแปรเพื่อใช้งานซ้ำ
-                                    print(response.status)
-                            
-                                    if response.status == 1 then  -- ตรวจสอบว่า status ถูกต้อง
-                                        -- ขายของ
-                                        for i,v in pairs(inventory().Units) do
-                                            if v.Type == "Electric Cyborg" or v.Type == "Legion Veteran" or v.Type == "Legion Assassin" then
-                                                if scaninbooth(game.Players.LocalPlayer.UserId)[i] == nil then
-                                                    if #scaninbooth2(game:GetService("Players"):GetUserIdFromNameAsync(plr.Name)) < 5 then
-                                                        local args = {
-                                                            [1] = getremote("SELL_BOOTH_ITEMS"),
-                                                            [2] = {
-                                                                ["Items"] = {
-                                                                    [tostring(i)] = {
-                                                                        ["Class"] = "Units"
-                                                                    }
-                                                                },
-                                                                ["Price"] = tonumber(jsondecode(getmammoz.Body).gem) -- ใช้ statusm.gem แทน getmammoz.Body
-                                                            }
-                                                        }
-                                                        letfkinggo(p63.SELL_BOOTH_ITEMS, args[2])
-
-                                                        getgenv().autotrademammoz = true
-                                                    end
-                                                end
-                                            end
-                                        end
-                                        if getgenv().autotrademammoz then
-                                            stop = false
-                                            UpdateStatusMammoz(2)
-                                            TradeMammoz()
-                                            break
-                                        end
-                                    else
-                                        print("Status is not 0, trying again in 15 seconds...")
-                                        wait(45)
-                                        UpdateStatusMammoz(0)
-                                    end
-                                end
                             end
 
                             function UpdateStatusBot(newstatus)
