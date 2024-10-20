@@ -498,6 +498,17 @@ pcall(function()
                                                 until tick() - tickn >= 5
                                             end
                                         end
+                                    else
+                                        for i,v in pairs(scaninbooth2(game.Players.LocalPlayer.UserId)) do
+                                            if i > 1 then
+                                                local args = {
+                                                    [1] = getremote("REMOVE_BOOTH_ITEM"),
+                                                    [2] = v
+                                                }
+                                                letfkinggo(p63.REMOVE_BOOTH_ITEM, args[2])
+                                                wait(5)
+                                            end
+                                        end 
                                     end
 
                                     --ทำการวาป ไปที่บูส (Server)
