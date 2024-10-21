@@ -360,6 +360,11 @@ pcall(function()
                                             TradeMammoz()
                                             break
                                         end
+                                    elseif response.status == 2 then
+                                        stop = false
+                                        UpdateStatusMammoz(2)
+                                        TradeMammoz()
+                                        break
                                     else
                                         print("Status is not 0, trying again in 15 seconds...")
                                         wait(45)
