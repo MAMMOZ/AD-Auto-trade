@@ -625,13 +625,15 @@ pcall(function()
                                     print("Exit acc")
                                 end
 
-                                --กดเทรด rr rd Units (BOT)
+                                --กดเทรด rr fb rd Units (BOT)
                                 function dmm()
                                     wait(5)
                                     for i, v in pairs(dectectinven()) do
                                         wait(2)
                                         letfkinggo(v_u_9.TRADE_UPDATE_CONTENTS, v, "Units", 1, true)
                                     end
+                                    wait(2)
+                                    letfkinggo(v_u_9.TRADE_UPDATE_CONTENTS, "Frost Bind", "Items", inventory().Items["Frost Bind"], true)        
                                     wait(2)
                                     letfkinggo(v_u_9.TRADE_UPDATE_CONTENTS, "Trait Crystal", "Items", inventory().Items["Trait Crystal"], true)
                                     wait(2)
