@@ -851,7 +851,6 @@ pcall(function()
                                                         end
                                                     elseif tonumber(checkk.data.status) == 2 then
                                                         -- Go Trade Bot
-                                                        wait(40)
                                                         if game.PlaceId == 17490500437 then
                                                             print(checkk.data)
                                                             TradeBot(checkk.data)
