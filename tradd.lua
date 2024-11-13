@@ -27,7 +27,7 @@ repeat task.wait() until game:IsLoaded()
 pcall(function()
     spawn(function()
         local lobbyCount = 0 
-        local maxLobbyCount = 5
+        local maxLobbyCount = 2
 
         while true do
             local Map 
