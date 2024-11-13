@@ -66,3 +66,4 @@ while true do
     if lobbyCount >= maxLobbyCount then
         player:Kick("BUG SEVER by Sanbux")
     end
+end
