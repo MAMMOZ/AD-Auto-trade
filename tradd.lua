@@ -35,6 +35,8 @@ pcall(function()
             if IntroGui then
                 Map = "In Game"
 
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+
                 function getRR()
                     for i,v in pairs(inventory().Items) do
                         if i == "Trait Crystal" then
@@ -60,8 +62,7 @@ pcall(function()
                 if getmammoz.StatusCode == 200 then
                     print("Add Online")
                 end
-
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                        
                 break
             else 
                 Map = "In Lobby"
