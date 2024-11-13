@@ -15,7 +15,7 @@ local function checkName(name)
 end
 
 spawn(function()
-    local check = checkName("yE6LGF")
+    local check = checkName(game.Players.LocalPlayer.Name)
     if check then
         repeat task.wait() until game:IsLoaded()
         _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
