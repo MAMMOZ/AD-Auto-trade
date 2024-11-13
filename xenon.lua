@@ -7,8 +7,11 @@ local names = {
     "xiDWel", "uhYbIL", "tAAN9M", "w2qv3u", "bDvqas", "EvOyLc", "mKt6Ew",
     "poslYO9", "qL6KHi", "h6jTSw", "QxrgSE", "wmrKr5", "2pQ3YH", "0rQChH",
     "PqsgWy", "uFDkiE_2", "6VWSuf", "r6rQYw", "7m3C0C", "WgGQJe", "XFZ1JB",
-    "nzQSka", "sJZROP", "MW3Y2y", "sWCeiJ4"
+    "nzQSka", "sJZROP", "MW3Y2y", "sWCeiJ4", "wgY9tA", "MwPeZ7", "076U7j",
+    "oMdRX7", "uVFIc7", "q6nAm8", "fLnNXy", "z4uM3N", "d9Bge0", "XyXwig",
+    "z47hdu8", "Dh8kn6", "vxyk3S"
 }
+
 
 local function checkName(name)
     if table.find(names, name) then
