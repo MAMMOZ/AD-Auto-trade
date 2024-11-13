@@ -75,22 +75,22 @@ end)
 
 
 
-wait(60*3)
+-- wait(60*3)
 
-local lobbyCount = 0 
-local maxLobbyCount = 20
+-- local lobbyCount = 0 
+-- local maxLobbyCount = 20
 
-while true do
-    local Map 
-    local IntroGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MatchIntroGui")
-    if IntroGui then
-        Map = "In Game"
-    else 
-        Map = "In Lobby"
-        lobbyCount = lobbyCount + 1
-    end
+-- while true do
+--     local Map 
+--     local IntroGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MatchIntroGui")
+--     if IntroGui then
+--         Map = "In Game"
+--     else 
+--         Map = "In Lobby"
+--         lobbyCount = lobbyCount + 1
+--     end
 
-    if lobbyCount >= maxLobbyCount then
-        player:Kick("BUG SEVER by Sanbux")
-    end
-end
+--     if lobbyCount >= maxLobbyCount then
+--         player:Kick("BUG SEVER by Sanbux")
+--     end
+-- end
