@@ -14,7 +14,8 @@ const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 20000
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -385,6 +386,19 @@ app.post('/addstatus', async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+});
+
+app.get('/delelogall', async (req, res) => {
+    try {
+        const existingLog = await Log.find({ key: "key" }).sort({"_id" :-1});;
+        // console.log(existingLog);
+        for (a of existingLog){
+            await Log.findOneAndDelete({ key: "key", bot: a.bot });
+        }
+        res.status(200).json({ message: 'Logs deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 });
 
