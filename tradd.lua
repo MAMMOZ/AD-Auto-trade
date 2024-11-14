@@ -860,10 +860,10 @@ pcall(function()
                                                         end
                                                     end
                                                 else
-                                                    loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                                                    loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                 end
                                             else
-                                                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                                                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                             end
                                         elseif checkk.goto == "Add Bot Now" then
                                             if tonumber(inventory().Currencies.Gems) >= 20000 then
@@ -872,7 +872,7 @@ pcall(function()
                                                 if tonumber(inventory().Currencies.Gems) >= 20000 then
                                                     checkaddbot = AddBot(0)
                                                     if checkaddbot == "error bot add" then
-                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                     else
                                                         Check()
                                                         break
@@ -880,14 +880,14 @@ pcall(function()
                                                 elseif tonumber(getRR()) >= 250 then
                                                     checkaddbot = AddBot(2)
                                                     if checkaddbot == "error bot add" then
-                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                     else
                                                         Check()
                                                         break
                                                     end
                                                 end
                                             else
-                                                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                                                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                             end
                                         end
                                     end
