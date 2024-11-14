@@ -402,6 +402,18 @@ app.get('/delelogall', async (req, res) => {
     }
 });
 
+app.get('/deleonlineall', async (req, res) => {
+    try {
+        const existingOnline = await Online.find({ key: "key" }).sort({"_id" :-1});;
+        for (a of existingOnline){
+            await Online.findOneAndDelete({ key: a.key, bot: a.bot });
+        }
+        res.status(200).json({ message: 'Online deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
 app.get('/', async (req, res) => {
     try {
         res.sendFile(path.join(__dirname, 'index.html'));
