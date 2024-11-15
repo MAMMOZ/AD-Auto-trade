@@ -35,7 +35,9 @@ pcall(function()
             if IntroGui then
                 Map = "In Game"
 
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                spawn(function()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/main/xenon.lua"))()
+                end)
 
                 function getRR()
                     for i,v in pairs(inventory().Items) do
