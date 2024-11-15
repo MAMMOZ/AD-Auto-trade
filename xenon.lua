@@ -21,10 +21,10 @@ local function checkName(name)
     end
 end
 
-repeat task.wait() until game:IsLoaded()
 spawn(function()
     local check = checkName(game.Players.LocalPlayer.Name)
     if check then
+        repeat task.wait() until game:IsLoaded()
         _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
         _G.SettingsAD = {
             ["LeaveAtWave"] = 31,
