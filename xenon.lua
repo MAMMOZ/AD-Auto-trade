@@ -1,17 +1,17 @@
 _G.Webhook  = {['WebhookLink'] = 'Link', ['SendWebhookReward'] = true}
-        _G.SettingsAD = {
-            ["LeaveAtWave"] = 31,
-            ["DelayStartLobby"] = 20,
-            ["MethodLeave"] = "Sell",
-            ["ReplayInStoryMode"] = false,
-            ["BlackScreen"] = true,
-            ["EquipBest"] = true,
-            ["SpeedModifier"] = 1
-        }
-        
-        getgenv().Key = "MARU-Q2P5-69DAP-W3ZU-NBQMT-1YP4"
-        getgenv().id = "1085195490976616470"
-        getgenv().Script_Mode = "Kaitun_Script"
+_G.SettingsAD = {
+    ["LeaveAtWave"] = 31,
+    ["DelayStartLobby"] = 20,
+    ["MethodLeave"] = "Sell",
+    ["ReplayInStoryMode"] = false,
+    ["BlackScreen"] = true,
+    ["EquipBest"] = true,
+    ["SpeedModifier"] = 1
+}
+
+getgenv().Key = "MARU-Q2P5-69DAP-W3ZU-NBQMT-1YP4"
+getgenv().id = "1085195490976616470"
+getgenv().Script_Mode = "Kaitun_Script"
 
 
 -- local names = {
