@@ -6,7 +6,7 @@ _G.SettingsAD = {
     ["ReplayInStoryMode"] = false,
     ["BlackScreen"] = true,
     ["EquipBest"] = true,
-    ["SpeedModifier"] = 1
+    ["SpeedModifier"] = 3
 }
 
 getgenv().Key = "MARU-Q2P5-69DAP-W3ZU-NBQMT-1YP4"
