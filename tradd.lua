@@ -892,6 +892,8 @@ pcall(function()
                                                 loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                             end
                                         end
+                                    else
+                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                     end
                                     wait(10)
                                 end
