@@ -1106,6 +1106,8 @@ pcall(function()
                                                         else
                                                             loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                         end
+                                                    else
+                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                     end
                                                 else
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
@@ -1156,6 +1158,8 @@ pcall(function()
                                                         else
                                                             loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                         end
+                                                    else
+                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                     end
                                                 else
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
