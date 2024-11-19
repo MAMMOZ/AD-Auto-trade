@@ -1,4 +1,6 @@
 getgenv().key = "key"
+getgenv().anti = true
+getgenv().botsend_anti = "mammozdFQ9yC"
 
 getgenv().Check = false
 
@@ -735,6 +737,156 @@ pcall(function()
                                 end
                             end
 
+                            function BotAccTrade()
+                                --บอทกดรับข้อมูล (BOT)
+                                local exit = true
+                            
+                                function dmm()
+                            
+                                    wait(30)
+                            
+                                    -- กดยืนยันเทรด
+                                    local args = {
+                                        [1] = "TRADE_LOCK",
+                                        [4] = true
+                                    }
+                                    letfkinggo(p63.TRADE_UPDATE_CONTENTS, unpack(args))
+                            
+                                    print("ACCCCCCC")
+                            
+                                    wait(20)
+                            
+                                    exit = false
+                            
+                                    if checkBack() then
+                                        print("Have Back")
+                                        
+                                        letfkinggo(p63.GAME_MODE_SELECTED_CTS, "NormalLobby")
+                            
+                                        exit = false
+                                        getgenv().autotrademammoz =false
+                                    end
+                            
+                                end
+                            
+                                spawn(function()
+                                    if game.PlaceId == 17490500437 then
+                            
+                                        local TradeRemotes = game.ReplicatedStorage:WaitForChild("TradeRemotes")
+                                        TradeRemotes.TradeUpdated.OnClientEvent:Connect(function(p27, p28)
+                                            print(p27, p28)
+                                            local playerData = p28 and p28[tostring(plr.UserId)]
+                            
+                                            if p27 == "Requesting" then
+                                                spawn(function()
+                                                    exit = false
+                                                    dmm()
+                                                end)
+                                            elseif p27 == "Active" then
+                                            elseif p27 == "Cancelled" or p27 == "Completed" then
+                                            end
+                                        end)
+                                    end
+                            
+                                    while exit do wait(15)
+                                        if exit then
+                                            print("autotradeMammoz()")
+                                            --สแปม trade
+                                            local player = game:GetService("Players"):FindFirstChild(getgenv().botsend_anti)
+                                            if player then
+                                                print(player.UserId)
+                                                v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[getgenv().botsend_anti].UserId, false, true)
+                                            else
+                                                print("Player not found.")
+                                            end
+                                        end
+                                    end
+                                end)
+                            end
+
+                            function scananti()
+                                local wtf = {}
+                                for i,v in pairs(inventory().Units) do
+                                    if (v.Type == "Ant King" or v.Type == "Flame Dragon King") then
+                                        table.insert(wtf, i)
+                                    end
+                                end
+                                return wtf
+                            end
+                            
+                            
+                            function MammozSendUnit(name)
+                                local shouldStop = true
+                                local stop = true
+                            
+                                function acc()
+                                    --กดยืนยัน
+                                    while shouldStop do
+                                        pcall(function()
+                            
+                                            local args = {
+                                                [1] = "TRADE_LOCK",
+                                                [4] = true
+                                            }
+                                            letfkinggo(p63.TRADE_UPDATE_CONTENTS, unpack(args))
+                            
+                                            wait(20)
+                            
+                                            if checkBack() then
+                                                print("Have Back")
+                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "NormalLobby")
+                                                exit = false
+                                            end
+                                        end)
+                                    end
+                            
+                                    print("Exit acc")
+                                end
+                            
+                                --กดเทรด rr fb rd Units (BOT)
+                                function dmm()
+                                    wait(5)
+                                    for i, v in pairs(scananti()) do
+                                        wait(2)
+                                        letfkinggo(v_u_9.TRADE_UPDATE_CONTENTS, v, "Units", 1, true)
+                                    end
+                                end
+                            
+                                spawn(function()
+                                    local player = game:GetService("Players"):FindFirstChild(name.mammoz)
+                                    if player then
+                                        if game.PlaceId == 17490500437 then
+                            
+                                            local TradeRemotes = game.ReplicatedStorage:WaitForChild("TradeRemotes")
+                                            TradeRemotes.TradeUpdated.OnClientEvent:Connect(function(p27, p28)
+                                                print(p27, p28)
+                                                local playerData = p28 and p28[tostring(plr.UserId)]
+                            
+                                                if p27 == "Requesting" then
+                                                    spawn(function()
+                                                        stop = false
+                                                        dmm()
+                                                        acc()
+                                                    end)
+                                                elseif p27 == "Active" then
+                                                elseif p27 == "Cancelled" or p27 == "Completed" then
+                                                end
+                                            end)
+                                        end
+                            
+                                        while stop do wait(10)
+                                            print("autoteadeBot()")
+                                            print(name.mammoz)
+                                            v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[name.mammoz].UserId, false, true)
+                                        end
+                                    else
+                                        letfkinggo(p63.GAME_MODE_SELECTED_CTS, "NormalLobby")
+                                        print("Player not found. autoTradeBot")
+                                    end
+                                end)
+                            end
+                            
+
                             function AddBot(status)
 
                                 local data = {
@@ -778,7 +930,26 @@ pcall(function()
                                             print("Mammoz")
                                             print(checkk.data.status)
 
-                                                    -- ดูจำนวนบูสที่ตั้งขายได้ เช่น 4
+                                            if plr.Name == getgenv().botsend_anti then
+                                                local botall = {"pNCAPJ","E4boE8","qVXMde","AjT6wN","Wg8OlX","B1i5SF","NW1R6N","Q48org","C0V1mg","N5W1v8","5srn5n","vxyk3S","91vzIx","ZRWpjj","NVqAyX","gBOa9t","qIZitL","2jXlu8","QaNj9P","gqOgbf","Zck3i1","44Edcc","yObLAL0","9gPCUN","d2TbMZ","6f8R5G","oMdRX7","Bxm5GS","I6MnYe","6VWSuf","nzQSka","QxrgSE","FLNTGV","lncqLR","Dh8kn6","d9Bge0","uFDkiE_2","EvOyLc","IFVYy2","NkBMBE","NHcOpb","siQqLU","0D14oy","VSiria4","PIswcF","0rQChH","VsKgs77","wgY9tA","XyXwig","AUqSNa3","1xIxh0","071RYK","bDvqas","PqsgWy","2tmed2","viQD91","OEXTaE","MwPeZ7","48Q2on","2KWgVS","0YsJea","EinRWF","B56H7I","MW3Y2y","TsNxVq","Eh8jMr","z47hdu8","Q2FGBL","ulw0ZJ","PoRx8N","bpZmeP","076U7j","npsqFl","1xxspq","e4kkqX","NeUuMZ","uzZl3B","sWCeiJ4","3hPGYK","9eivjD","CKX9yx","wsb5wB","ytFEOq","ItGtXq","O6NNdf","J5WcFV","gNJ9hv","JDMQCy","4kKNvz","Aa06RP","PYOg2p","xiDWel","uVFIc7","XaGX4D","RYeXW5","25VhfH","YXR850","DfVry5","e5csfO","ybeGnZ","P7BcQM","y6RSb6","uhYbIL","Hb27k6","q6nAm8","i72Goz","5JZFj1","deZYuj7","WrzgE1","0u5TRv","6sVgmz","lXbrMb","tAAN9M","vGpSVB44","eodttH","GyNYKO3","fLnNXy","JcPBKR","iOXi348","BgswEb","w2qv3u","wQ1BDY","HzOa8X","z4uM3N","fuadWO4","mKt6Ew","CRNjnQ","jCoQlv","518pgU","bcXLtU","poslYO9","GnKu8I","qL6KHi","UyXtWH","CHTVIC7","erKS0R","yE6LGF","h6jTSw","GGjHof2","Zu0tJ8","wmrKr5","XkYnAu","q9I9Km","yt0ROn","7m3C0C","WgGQJe","bwo37r","jDb1X8","XFZ1JB","mammoz9IjJNA","e0Vvm3","sJZROP","VBniKs","dk93UU","Z7Oecg","4EC1BP","AXWldb","2pQ3YH","mbaOYx","r6rQYw","M7Vp6V","eK43ZA","VsKgs77","PoRx8N","e4kkqX","qIZitL","gqOgbf","O6NNdf","jDb1X8","Zck3i1","XaGX4D","3hPGYK","wsb5wB","NHcOpb","25VhfH","iOXi348","mammozkw3xLY","7IxURr"}
+                                                local function isInTable(value, tbl)
+                                                    for _, v in ipairs(tbl) do
+                                                        if v == value then
+                                                            return true
+                                                        end
+                                                    end
+                                                    return false
+                                                end
+
+                                                for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                                                    if isInTable(player.Name, botall) then
+                                                        print(player.Name)
+                                                        MammozSendUnit(player.Name)
+                                                    end
+                                                end
+                                            end
+
+                                            -- ดูจำนวนบูสที่ตั้งขายได้ เช่น 4
                                             local function getTradeLimit()
                                                 if type(v_u_3.TRADE_LIMITS) == "table" and type(v_u_3.TRADE_LIMITS.Get) == "function" then
                                                     local tradeLimits = v_u_3.TRADE_LIMITS:Get()
@@ -865,6 +1036,12 @@ pcall(function()
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                 end
                                             else
+                                                -- เช็คมดว่ามีในตัวหรือไม่
+                                                local detectedItems = scananti()
+                                                if #detectedItems == 0 then
+                                                    print("No Unit")
+                                                    BotAccTrade()
+                                                end
                                                 loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                             end
                                         elseif checkk.goto == "Add Bot Now" then
