@@ -945,6 +945,7 @@ pcall(function()
                                                     letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
                                                 end
                                                 while true do
+                                                    print("send anit")
                                                     if plr.Name == getgenv().botsend_anti then
                                                         for _, player in pairs(game:GetService("Players"):GetPlayers()) do
                                                             if isInTable(player.Name, botall) then
