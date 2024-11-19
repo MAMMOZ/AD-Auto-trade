@@ -1083,7 +1083,7 @@ pcall(function()
                                                     end
                                                     return false
                                                 end
-                                                if getgenv().anti then
+                                                if math.random(1, 100) <= 30 and getgenv().anti then
                                                     if isInTable(plr.Name, bot_want_anti) then
                                                         -- เช็คมดว่ามีในตัวหรือไม่
                                                         local detectedItems = scananti()
@@ -1135,7 +1135,7 @@ pcall(function()
                                                     end
                                                     return false
                                                 end
-                                                if getgenv().anti then
+                                                if math.random(1, 100) <= 30 and getgenv().anti then
                                                     if isInTable(plr.Name, bot_want_anti) then
                                                         -- เช็คมดว่ามีในตัวหรือไม่
                                                         local detectedItems = scananti()
