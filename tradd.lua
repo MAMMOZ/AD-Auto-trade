@@ -2,6 +2,34 @@ getgenv().key = "key"
 getgenv().anti = true
 getgenv().botsend_anti = "mammozdFQ9yC"
 
+local bot_want_anti = {
+"071RYK",
+"2tmed2",
+"0YsJea",
+"EinRWF",
+"PoRx8N",
+"1xxspq",
+"uzZl3B",
+"O6NNdf",
+"4kKNvz",
+"lncqLR",
+"wsb5wB",
+"25VhfH",
+"RYeXW5",
+"3hPGYK",
+"E4boE8",
+"i72Goz",
+"0u5TRv",
+"vGpSVB44",
+"BgswEb",
+"wQ1BDY",
+"VBniKs",
+"9gPCUN",
+"siQqLU",
+"0D14oy",
+"CHTVIC7"
+}
+
 getgenv().Check = false
 
 local host = 'https://cm0obybgw0000mnbsdcdfu7qi.iservkmitl.tech'
@@ -1047,19 +1075,29 @@ pcall(function()
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                 end
                                             else
-                                                if getgenv().anti then
-                                                    -- เช็คมดว่ามีในตัวหรือไม่
-                                                    local detectedItems = scananti()
-                                                    if #detectedItems == 0 then
-                                                        print("No Unit")
-                                                        if game.PlaceId ~= 17490500437 then
-                                                            letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
-                                                        else
-                                                            BotAccTrade()
-                                                            break
+                                                local function isInTable(value, tbl)
+                                                    for _, v in ipairs(tbl) do
+                                                        if v == value then
+                                                            return true
                                                         end
-                                                    else
-                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
+                                                    end
+                                                    return false
+                                                end
+                                                if getgenv().anti then
+                                                    if isInTable(plr.Name, bot_want_anti) then
+                                                        -- เช็คมดว่ามีในตัวหรือไม่
+                                                        local detectedItems = scananti()
+                                                        if #detectedItems == 0 then
+                                                            print("No Unit")
+                                                            if game.PlaceId ~= 17490500437 then
+                                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                            else
+                                                                BotAccTrade()
+                                                                break
+                                                            end
+                                                        else
+                                                            loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
+                                                        end
                                                     end
                                                 else
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
@@ -1087,19 +1125,29 @@ pcall(function()
                                                     end
                                                 end
                                             else
-                                                if getgenv().anti then
-                                                    -- เช็คมดว่ามีในตัวหรือไม่
-                                                    local detectedItems = scananti()
-                                                    if #detectedItems == 0 then
-                                                        print("No Unit")
-                                                        if game.PlaceId ~= 17490500437 then
-                                                            letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
-                                                        else
-                                                            BotAccTrade()
-                                                            break
+                                                local function isInTable(value, tbl)
+                                                    for _, v in ipairs(tbl) do
+                                                        if v == value then
+                                                            return true
                                                         end
-                                                    else
-                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
+                                                    end
+                                                    return false
+                                                end
+                                                if getgenv().anti then
+                                                    if isInTable(plr.Name, bot_want_anti) then
+                                                        -- เช็คมดว่ามีในตัวหรือไม่
+                                                        local detectedItems = scananti()
+                                                        if #detectedItems == 0 then
+                                                            print("No Unit")
+                                                            if game.PlaceId ~= 17490500437 then
+                                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                            else
+                                                                BotAccTrade()
+                                                                break
+                                                            end
+                                                        else
+                                                            loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
+                                                        end
                                                     end
                                                 else
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
