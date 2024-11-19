@@ -948,6 +948,7 @@ pcall(function()
                                                             MammozSendUnit(player.Name)
                                                         end
                                                     end
+                                                    break
                                                 end
                                             end
 
