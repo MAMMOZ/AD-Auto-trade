@@ -798,6 +798,7 @@ pcall(function()
                                                 v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[getgenv().botsend_anti].UserId, false, true)
                                             else
                                                 print("Player not found.")
+                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "NormalLobby")
                                             end
                                         end
                                     end
