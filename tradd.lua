@@ -953,6 +953,7 @@ pcall(function()
                                                             end
                                                         end
                                                     end
+                                                    wait(10)
                                                 end
                                             end
 
