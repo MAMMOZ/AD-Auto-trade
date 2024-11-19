@@ -1047,15 +1047,19 @@ pcall(function()
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                 end
                                             else
-                                                -- เช็คมดว่ามีในตัวหรือไม่
-                                                local detectedItems = scananti()
-                                                if #detectedItems == 0 then
-                                                    print("No Unit")
-                                                    if game.PlaceId ~= 17490500437 then
-                                                        letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                if getgenv().anti then
+                                                    -- เช็คมดว่ามีในตัวหรือไม่
+                                                    local detectedItems = scananti()
+                                                    if #detectedItems == 0 then
+                                                        print("No Unit")
+                                                        if game.PlaceId ~= 17490500437 then
+                                                            letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                        else
+                                                            BotAccTrade()
+                                                            break
+                                                        end
                                                     else
-                                                        BotAccTrade()
-                                                        break
+                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                     end
                                                 else
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
@@ -1083,15 +1087,19 @@ pcall(function()
                                                     end
                                                 end
                                             else
-                                                -- เช็คมดว่ามีในตัวหรือไม่
-                                                local detectedItems = scananti()
-                                                if #detectedItems == 0 then
-                                                    print("No Unit")
-                                                    if game.PlaceId ~= 17490500437 then
-                                                        letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                if getgenv().anti then
+                                                    -- เช็คมดว่ามีในตัวหรือไม่
+                                                    local detectedItems = scananti()
+                                                    if #detectedItems == 0 then
+                                                        print("No Unit")
+                                                        if game.PlaceId ~= 17490500437 then
+                                                            letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                        else
+                                                            BotAccTrade()
+                                                            break
+                                                        end
                                                     else
-                                                        BotAccTrade()
-                                                        break
+                                                        loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                     end
                                                 else
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
