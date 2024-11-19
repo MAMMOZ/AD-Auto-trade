@@ -849,6 +849,7 @@ pcall(function()
                                     for i, v in pairs(scananti()) do
                                         wait(2)
                                         letfkinggo(v_u_9.TRADE_UPDATE_CONTENTS, v, "Units", 1, true)
+                                        break
                                     end
                                 end
                             
@@ -1010,6 +1011,17 @@ pcall(function()
                                                 end
                                             end
                                         elseif checkk.goto == "Bot Auto" then
+                                            -- เช็คมดว่ามีในตัวหรือไม่
+                                            local detectedItems = scananti()
+                                            if #detectedItems == 0 then
+                                                print("No Unit")
+                                                if game.PlaceId ~= 17490500437 then
+                                                    letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                else
+                                                    BotAccTrade()
+                                                    break
+                                                end
+                                            end
                                             if tonumber(inventory().Currencies.Gems) >= 20000 or tonumber(getRR()) >= 250 then
                                                 if checkk.data.bot == plr.Name then
                                                     print("Bot Auto")
@@ -1044,16 +1056,6 @@ pcall(function()
                                                     loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                                 end
                                             else
-                                                -- เช็คมดว่ามีในตัวหรือไม่
-                                                local detectedItems = scananti()
-                                                if #detectedItems == 0 then
-                                                    print("No Unit")
-                                                    if game.PlaceId ~= 17490500437 then
-                                                        letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
-                                                    else
-                                                        BotAccTrade()
-                                                    end
-                                                end
                                                 loadstring(game:HttpGet("https://raw.githubusercontent.com/MAMMOZ/AD-Auto-trade/refs/heads/main/Play.lua"))()
                                             end
                                         elseif checkk.goto == "Add Bot Now" then
