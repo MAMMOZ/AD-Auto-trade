@@ -853,7 +853,7 @@ pcall(function()
                                 end
                             
                                 spawn(function()
-                                    local player = game:GetService("Players"):FindFirstChild(name.mammoz)
+                                    local player = game:GetService("Players"):FindFirstChild(name)
                                     if player then
                                         if game.PlaceId == 17490500437 then
                             
@@ -876,8 +876,8 @@ pcall(function()
                             
                                         while stop do wait(10)
                                             print("autoteadeBot()")
-                                            print(name.mammoz)
-                                            v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[name.mammoz].UserId, false, true)
+                                            print(name)
+                                            v_u_9.TRADE_SEND_REQUEST:Invoke(game:GetService("Players")[name].UserId, false, true)
                                         end
                                     else
                                         letfkinggo(p63.GAME_MODE_SELECTED_CTS, "NormalLobby")
