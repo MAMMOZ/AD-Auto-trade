@@ -1089,7 +1089,7 @@ pcall(function()
                                                         if #detectedItems == 0 then
                                                             print("No Unit")
                                                             if game.PlaceId ~= 17490500437 then
-                                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby", getgenv().botsend_anti)
                                                             else
                                                                 BotAccTrade()
                                                                 break
@@ -1141,7 +1141,7 @@ pcall(function()
                                                         if #detectedItems == 0 then
                                                             print("No Unit")
                                                             if game.PlaceId ~= 17490500437 then
-                                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby")
+                                                                letfkinggo(p63.GAME_MODE_SELECTED_CTS, "TradingLobby", getgenv().botsend_anti)
                                                             else
                                                                 BotAccTrade()
                                                                 break
