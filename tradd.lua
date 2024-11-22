@@ -838,6 +838,7 @@ pcall(function()
                                 for i,v in pairs(inventory().Units) do
                                     if (v.Type == "Ant King" or v.Type == "Flame Dragon King") then
                                         table.insert(wtf, i)
+                                        break
                                     end
                                 end
                                 return wtf
@@ -878,7 +879,6 @@ pcall(function()
                                     for i, v in pairs(scananti()) do
                                         wait(2)
                                         letfkinggo(v_u_9.TRADE_UPDATE_CONTENTS, v, "Units", 1, true)
-                                        break
                                     end
                                 end
                             
